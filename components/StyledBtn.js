@@ -14,6 +14,11 @@ export const ButtonStyleCss = css`
   svg {
     height: 16px;
   }
+
+  ${props => props.block && css`
+    display: block;
+    width: 100%;
+  `}
   
   ${props => props.size  === 'l' && css`
     font-size: 1.2rem;

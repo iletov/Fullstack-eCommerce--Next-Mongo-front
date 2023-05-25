@@ -1,11 +1,38 @@
-import React from 'react'
+import { createContext, useEffect, useState } from "react";
 
-const CartContext = () => {
+export const CartContext = createContext({});
+
+export const CartContextProvider = ({ children }) => {
+  const storage = typeof window !== "undefined" ? window.localStorage : null;
+
+  const [cartProducts, setCartProducts] = useState([]);
+  
+  useEffect(() =>{
+    if (cartProducts?.length > 0) {
+      storage?.setItem('cart', JSON.stringify(cartProducts));
+    }
+  },[cartProducts]); //when add item to cart, save it to local storage.
+
+  useEffect(() => {
+    if (storage && storage.getItem('cart')) {
+      setCartProducts(JSON.parse(storage.getItem('cart')));
+    }
+  }, []);
+
+  const addProduct = (productId) => {
+    setCartProducts(prev => [...prev, productId])
+  }
+
   return (
-    <>
+    <CartContext.Provider
+      value={{ 
+        cartProducts,
+        setCartProducts,
+        addProduct,
 
-    </>
+        }}
+    >
+      {children}
+    </CartContext.Provider>
   )
 }
-
-export default CartContext
