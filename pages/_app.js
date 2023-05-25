@@ -1,19 +1,17 @@
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyles = createGlobalStyle`
-  
-  * {
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+  body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: system-ui, 'Roboto', sans-serif;
+    background-color: #eee;
   }
-
-  :root {
-    --primary-color: #5542f6;
-    --white-color: #fff;
-  }
-`
+`;
 
 export default function App({ Component, pageProps }) {
   return (

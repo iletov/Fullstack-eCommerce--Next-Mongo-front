@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { primary, white } from './Colors';
 
 export const ButtonStyleCss = css`
   border: 0;
@@ -9,9 +10,9 @@ export const ButtonStyleCss = css`
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+  justify-content: center;
   svg {
     height: 16px;
-    margin-right: 5px;
   }
   
   ${props => props.size  === 'l' && css`
@@ -20,24 +21,34 @@ export const ButtonStyleCss = css`
   `}
 
   ${props => props.primary && css`
-    background-color: var(--primary-color);
-    color: var(--white-color);
-    border: 1px solid var(--primary-color);
-    
+    background-color: ${primary};
+    color: ${white};
+    border: 1px solid ${primary};
     svg {
       height: 16px;
+      padding-bottom: 2px;
+      margin: 0 3px;
+    }
+  `}
+
+  ${props => props.primaryOutline && css`
+    background-color: transparent;
+    color: ${primary};
+    padding: 0;
+    svg {
+      height: 24px;
     }
   `}
 
   ${props => props.white && css`
-    background-color: var(--white-color);
+    background-color: ${white};
     color: #000;
   `}
 
   ${props => props.outline && css`
     background-color: transparent;
-    color: var(--white-color);
-    border: 1px solid var(--white-color);
+    color: ${white};
+    border: 1px solid ${white};
   `}
 
 `;
