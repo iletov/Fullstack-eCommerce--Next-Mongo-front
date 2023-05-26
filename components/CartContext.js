@@ -19,8 +19,21 @@ export const CartContextProvider = ({ children }) => {
     }
   }, []);
 
+  
   const addProduct = (productId) => {
     setCartProducts(prev => [...prev, productId])
+  };
+
+
+  const removeProduct = (productId) => {
+    setCartProducts(prev => {
+      const position = prev.indexOf(productId);
+      
+      if (position !== -1) {
+        return prev.filter((value, index) => index !== position);
+      }
+      return prev;
+    });
   }
 
   return (
@@ -29,7 +42,7 @@ export const CartContextProvider = ({ children }) => {
         cartProducts,
         setCartProducts,
         addProduct,
-
+        removeProduct,
         }}
     >
       {children}
