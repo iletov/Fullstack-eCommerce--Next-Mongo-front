@@ -11,10 +11,10 @@ export default async function handler(req, res) {
   const {
     name, email, city, 
     postalCode, streetAddress, country, 
-    products,
+    cartProducts,
   } = req.body;
   await mongooseConnect();
-  const productsIds = products.split(',');
+  const productsIds = cartProducts;
   const uniqueIds = [...new Set(productsIds)];
   const productsInfos = await Product.find({_id:uniqueIds});
 
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         price_data: {
           currency: 'USD',
           product_data: {name:productInfo.title},
-          unit_amount: quantity * productInfo.price, 
+          unit_amount: productInfo.price * 100, 
         },
       });
     }
@@ -39,13 +39,19 @@ export default async function handler(req, res) {
     line_items, name, email, city, postalCode, streetAddress, country, paid:false,
   });
 
-  const  await stripe.checkout.sessions.create({
+  const session = await stripe.checkout.sessions.create({
     line_items,
     mode: 'payment',
     customer_email: email,
     success_url:process.env.PUBLIC_URL + '/cart?success=1',
     cancel_url:process.env.PUBLIC_URL + '/cart?canceled=1',
+    // success_url: `${req.headers.origin}/success`,
+    // cancel_url: `${req.headers.origin}/canceled`,
     metadata: {orderId:orderDoc._id.toString()},
+  })
+
+  res.json({
+    url:session.url,
   })
 
 }

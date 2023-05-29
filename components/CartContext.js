@@ -34,6 +34,10 @@ export const CartContextProvider = ({ children }) => {
       }
       return prev;
     });
+  };
+
+  const clearCart = () => {
+    setCartProducts([]);
   }
 
   return (
@@ -43,6 +47,7 @@ export const CartContextProvider = ({ children }) => {
         setCartProducts,
         addProduct,
         removeProduct,
+        clearCart,
         }}
     >
       {children}
