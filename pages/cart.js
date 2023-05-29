@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components'
 import axios from 'axios';
 import Table from '@/components/Table';
+import Input from '@/components/Input';
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -43,15 +44,30 @@ const QuantityLabel = styled.span`
   padding: 5px;
 `;
 
+const CityHolder = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+
 const CartPage = () => {
   const {cartProducts, addProduct, removeProduct} = useContext(CartContext);
   const [products, setProducts] = useState([]);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [streetAddress, setStreetAddress] = useState('');
+  const [country, setCountry] = useState('');
+
 
    useEffect(() => {
     if (cartProducts.length > 0) {
       axios.post('/api/cart', {ids:cartProducts}).then(response => {
         setProducts(response.data);
       })
+    } else {
+      setProducts([])
     }
    }, [cartProducts]);
 
@@ -120,13 +136,56 @@ const CartPage = () => {
               </Table>
             }
           </Box>
-          
             {!!cartProducts?.length && (
               <Box>
                 <h3>Order Information</h3>
-                <input type='text' placeholder='Address' />
-                <input type='text' placeholder='Address 2' />
-                <Button block primary >Continue to Payment</Button>
+                <form method='POST' action='/api/checkout'>
+                  <Input 
+                    type='text' 
+                    placeholder='Name' 
+                    value={name}
+                    name='name' 
+                    onChange={(e) => setName(e.target.vaue)} />
+                  <Input 
+                    type='text' 
+                    placeholder='Email' 
+                    value={email}
+                    name='email' 
+                    onChange={(e) => setEmail(e.target.vaue)} />
+                  <CityHolder>
+                    <Input 
+                      type='text' 
+                      placeholder='City' 
+                      value={city}
+                      name='city' 
+                      onChange={(e) => setCity(e.target.vaue)} />
+                    <Input 
+                      type='text' 
+                      placeholder='Postal Code' 
+                      value={postalCode}
+                      name='postalCode' 
+                      onChange={(e) => setPostalCode(e.target.vaue)} />
+                  </CityHolder>
+                  <Input 
+                    type='text' 
+                    placeholder='Street Address' 
+                    value={streetAddress}
+                    name='streetAddress' 
+                    onChange={(e) => setStreetAddress(e.target.vaue)} />
+                  <Input 
+                    type='text' 
+                    placeholder='Country' 
+                    value={country}
+                    name='country' 
+                    onChange={(e) => setCountry(e.target.vaue)} />
+                  <input 
+                    type='hidden' 
+                    name='products' 
+                    value={cartProducts.join(',')} />
+                  <Button block primary 
+                    type='submit
+                    ' >Continue to Payment</Button>
+                </form>
               </Box>
             )}
         </ColumnsWrapper>
