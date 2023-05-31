@@ -7,18 +7,13 @@ import styled from 'styled-components'
 import axios from 'axios';
 import Table from '@/components/Table';
 import Input from '@/components/Input';
+import Box from '@/components/Box';
 
 const ColumnsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1.3fr .7fr;
   gap: 40px;
   margin-top: 40px;
-`;
-
-const Box = styled.div`
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 30px;
 `;
 
 const ProductInfoCell = styled.td`
@@ -144,7 +139,7 @@ const CartPage = () => {
                       
                       <ProductInfoCell>
                         <ProductImageBox>
-                          <img src={product.images[0]} alt='...'/>
+                          <img src={product?.images[0]} alt='...'/>
                         </ProductImageBox>  
                         {product.title}
                       </ProductInfoCell>
