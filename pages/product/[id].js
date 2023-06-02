@@ -13,10 +13,15 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 
 const ColWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  display: flex;
+  flex-direction: column;
   gap: 40px;
   margin-top: 40px;
+
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+  }
 `;
 
 const PriceRow = styled.div`

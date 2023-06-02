@@ -44,9 +44,13 @@ const PriceBox = styled.div`
 `;
 
 const Price = styled.div`
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
-`
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.3rem;
+  }
+`;
 
 const ProductBox = ({ _id, title, description, price, images }) => {
   const {addProduct} = useContext(CartContext)

@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Icon = styled.div`
-  padding-right: 05px ;
+  padding-right: 5px;
+
 `;
 
 const CartIcon = ({ className="w-6 h-6"}) => {

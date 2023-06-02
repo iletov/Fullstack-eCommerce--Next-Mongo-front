@@ -10,10 +10,15 @@ import Input from '@/components/Input';
 import Box from '@/components/Box';
 
 const ColumnsWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1.3fr .7fr;
+  display: flex;
+  flex-direction: column;
   gap: 40px;
   margin-top: 40px;
+
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+  }
 `;
 
 const ProductInfoCell = styled.td`
