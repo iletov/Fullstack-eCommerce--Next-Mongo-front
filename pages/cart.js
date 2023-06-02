@@ -17,7 +17,7 @@ const ColumnsWrapper = styled.div`
 
   @media screen and (min-width: 768px) {
     display: grid;
-    grid-template-columns: 1.3fr .7fr;
+    grid-template-columns: 1.2fr .8fr;
   }
 `;
 
