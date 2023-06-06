@@ -1,4 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+
 
 export const CartContext = createContext({});
 
@@ -22,6 +24,7 @@ export const CartContextProvider = ({ children }) => {
   
   const addProduct = (productId) => {
     setCartProducts(prev => [...prev, productId])
+    
   };
 
 

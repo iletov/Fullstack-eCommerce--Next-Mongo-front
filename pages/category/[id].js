@@ -2,9 +2,11 @@ import Center from '@/components/Center'
 import { dark, grey, lightGray } from '@/components/Colors'
 import Header from '@/components/Header'
 import ProductsGrid from '@/components/ProductsGrid'
+import { Spinner } from '@/components/Spinner'
 import { Category } from '@/models/Category'
 import { Product } from '@/models/Product'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const CategoryHeader = styled.div`
@@ -34,20 +36,50 @@ const Filter = styled.div`
   }
 `;
 
-const CategoryPage = ({ category, products:originalProducts }) => {
-  const [products, setProducts] = useState(originalProducts)
-  const [filtersValues, setFiltersValues] = useState(
-    category.properties.map((prop) => ({name: prop.name, value: 'all'}))
-  );
+const CategoryPage = ({ category, subCategories, products:originalProducts }) => {
+  const defaultFiltersValues = category.properties.map((prop) => ({name: prop.name, value: 'all'}));
+  const defaultSorting = '_id-desc';
+
+  const [products, setProducts] = useState(originalProducts);
+  const [filtersValues, setFiltersValues] = useState(defaultFiltersValues);
+  const [sort, setSort] = useState(defaultSorting);
+  const [loadingProducts, setLoadingProducts] = useState(false);
 
   const handlerFilterChange = (filterName, filterValue) => {
     setFiltersValues(prev => {
-      return prev.amp((prop) => ({
+      return prev.map((prop) => ({
         name: prop.name,
         value: prop.name === filterName ? filterValue : prop.value,
       }));
     })
   };
+
+  useEffect(() => {
+    if (filtersValues !== defaultFiltersValues || sort !== defaultSorting) {
+      setLoadingProducts(true);
+    }
+
+    const catIds = [category._id, ...(subCategories?.map((c) => c._id) || [])];
+   
+    const params = new URLSearchParams;
+    params.set('categories', catIds.join(','))
+    params.set('sort', sort);
+
+    filtersValues.forEach(f => {
+      if (f.value !== 'all') {
+        params.set(f.name, f.value)
+      }
+      });
+
+    const url = `/api/products?` + params.toString();
+    axios.get(url).then(result => {
+      setProducts(result.data)})
+
+      setTimeout(() => {
+        setLoadingProducts(false);
+      }, 400);
+
+  }, [filtersValues, sort])
 
   return (
     <>
@@ -65,16 +97,36 @@ const CategoryPage = ({ category, products:originalProducts }) => {
                   value={filtersValues.find((filter) => filter.name === prop.name).value}
                 >
                   <option value='all'>All</option>
-                  {prop.values.map((val) => (
-                    <option key={value} value={val} >{val}</option>
+                  {prop.values.map((val, index) => (
+                    <option key={index} value={val} >{val}</option>
                   ))}
                 </select>
               </Filter>
             ))}
+            <Filter>
+              <span>Sort:</span>
+              <select value={sort} onChange={e => setSort(e.target.value)}>
+                <option value='price-asc'>price &darr; </option>
+                <option value='price-desc'>price &uarr;</option>
+                <option value='_id-asc'>newest &darr;</option>
+                <option value='_id-desc'>newest &uarr;</option>
+              </select>
+            </Filter>
           </FiltersWrapper>
 
         </CategoryHeader>
-        <ProductsGrid products={...products}></ProductsGrid>
+        {loadingProducts && (
+          <Spinner />
+        )}
+        {!loadingProducts && (
+          <div>
+            {products.length > 0 ? 
+              <ProductsGrid products={...products}></ProductsGrid>
+            : 
+            <div>Sorry, no products to display!</div>}
+          </div>
+           
+        )}
       </Center>
     </>
   )
@@ -95,6 +147,7 @@ export async function getServerSideProps(context) {
     props: {
       category: JSON.parse(JSON.stringify(category)),
       products: JSON.parse(JSON.stringify(products)),
+      subCategories: JSON.parse(JSON.stringify(subCategories)),
     }
   };
 }

@@ -1,4 +1,5 @@
 import { CartContextProvider } from "@/components/CartContext";
+import { Toaster } from "react-hot-toast";
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyles = createGlobalStyle`
@@ -23,6 +24,7 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyles />
         <CartContextProvider>
+          <Toaster />
           <Component {...pageProps} />
         </CartContextProvider>
         

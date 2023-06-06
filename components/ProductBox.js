@@ -5,6 +5,7 @@ import CartIcon from './CartIcon';
 import Link from 'next/link';
 import { black } from './Colors';
 import { CartContext } from './CartContext';
+import { toast } from 'react-hot-toast';
 
 const ProductWrapper = styled.div`
 
@@ -54,6 +55,9 @@ const Price = styled.div`
 
 const ProductBox = ({ _id, title, description, price, images }) => {
   const {addProduct} = useContext(CartContext)
+  const msg = () => {
+    toast.success(`${title} added to cart`, {position: 'top-right'})
+  }
 
   const url = '/product/'+_id;
   
@@ -71,7 +75,8 @@ const ProductBox = ({ _id, title, description, price, images }) => {
           </div>
           <PriceBox>
             <Price>${price}</Price>
-            <Button primaryOutline onClick={() => addProduct(_id)} ><CartIcon /></Button>
+            
+            <Button primaryOutline onClick={() => [addProduct(_id), msg()]} ><CartIcon /></Button>
           </PriceBox>
           
         </ProductInfoBox>

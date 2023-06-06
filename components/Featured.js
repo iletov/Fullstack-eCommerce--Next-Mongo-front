@@ -5,6 +5,7 @@ import Button from './StyledBtn';
 import ButtonLink from './ButtonLink';
 import CartIcon from './CartIcon';
 import { CartContext } from './CartContext';
+import { toast } from 'react-hot-toast';
 
 const BackGround = styled.div`
     background-color: #222;
@@ -72,6 +73,7 @@ const Featured = ({ product }) => {
 
   const addFeaturedToCart = () => {
     addProduct(product._id)
+    toast.success(`${product.title} added to cart`, {position: 'top-right'})
   }
 
   return (
