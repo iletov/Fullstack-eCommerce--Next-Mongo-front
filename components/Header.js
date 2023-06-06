@@ -5,6 +5,7 @@ import Center from './Center'
 import { CartContext } from './CartContext'
 import Bars from './Bars'
 import { dark, white } from './Colors'
+import { SearchIcon } from './SearchIcon'
 
 const StyledHeader = styled.header`
   background-color: ${dark};
@@ -50,8 +51,12 @@ const StyledNav = styled.nav`
 const NavLink = styled(Link)`
   display: block;
   color:#aaa;
+  min-width: 30px;
   text-decoration: none;
   padding: 10px 0;
+  svg {
+    height: 20px;
+  }
   @media screen and (min-width: 768px) {
     padding: 0;
   }
@@ -69,6 +74,10 @@ const NavButton = styled.button`
   @media screen and (min-width: 768px) {
     display: none;
   }
+`;
+
+const SideIcons = styled.div`
+  display: flex;
 `;
 
 const Header = () => {
@@ -89,10 +98,13 @@ const Header = () => {
             <NavLink href={'/cart'}>Cart ({cartProducts.length})</NavLink>
           </StyledNav>
 
-          <NavButton onClick={() => setMobileView((prev) => !prev)}>
-            <Bars />
-          </NavButton>
-
+          <SideIcons>
+            <NavLink href={'/search'}><SearchIcon /></NavLink>
+            <NavButton onClick={() => setMobileView((prev) => !prev)}>
+              <Bars />
+            </NavButton>
+          </SideIcons>
+          
         </Wrapper>
       </Center>
     </StyledHeader>

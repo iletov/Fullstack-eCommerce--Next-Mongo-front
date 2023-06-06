@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Center from './Center';
 import ProductsGrid from './ProductsGrid';
-import { Search } from './Search';
 
 
 const Title = styled.h2`
@@ -21,7 +20,7 @@ const NewProducts = ({ newProducts }) => {
     <>
       <Center>
         <Title> New Products</Title>
-        <Search />
+       
         <ProductsGrid products={newProducts} /> 
       </Center>
       
