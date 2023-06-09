@@ -8,6 +8,7 @@ import axios from 'axios';
 import Table from '@/components/Table';
 import Input from '@/components/Input';
 import Box from '@/components/Box';
+import { RevealWrapper } from 'next-reveal';
 
 const ColumnsWrapper = styled.div`
   display: flex;
@@ -125,6 +126,7 @@ const CartPage = () => {
       <Header />
       <Center>
         <ColumnsWrapper>
+          <RevealWrapper delay={50}>
           <Box>
             <h3>Cart</h3>
             {!products?.length ? (
@@ -170,7 +172,10 @@ const CartPage = () => {
               </Table>
             }
           </Box>
+          </RevealWrapper>
+          
             {!!cartProducts?.length && (
+              <RevealWrapper delay={150}>
               <Box>
                 <h3>Order Information</h3>
                
@@ -219,6 +224,7 @@ const CartPage = () => {
                   </Button>
                
               </Box>
+              </RevealWrapper>
             )}
         </ColumnsWrapper>
       </Center>
