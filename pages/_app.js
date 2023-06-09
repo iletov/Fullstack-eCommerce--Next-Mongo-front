@@ -1,6 +1,7 @@
 import { CartContextProvider } from "@/components/CartContext";
 import { Toaster } from "react-hot-toast";
 import { createGlobalStyle } from "styled-components"
+import { SessionProvider } from "next-auth/react"
 
 const GlobalStyles = createGlobalStyle`
 
@@ -19,14 +20,17 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: {session, ...pageProps} }) {
   return (
     <>
       <GlobalStyles />
-        <CartContextProvider>
-          <Toaster />
-          <Component {...pageProps} />
-        </CartContextProvider>
+        <SessionProvider session={session}>
+          <CartContextProvider>
+            <Toaster />
+            <Component {...pageProps} />
+          </CartContextProvider>
+        </SessionProvider>
+        
         
     </>
       
