@@ -15,13 +15,14 @@ const Title = styled.h2`
   }
 `;
 
-const NewProducts = ({ newProducts }) => {
+const NewProducts = ({ newProducts, wishedProducts }) => {
+  // console.log({wishedProducts})
   return (
     <>
       <Center>
         <Title> New Products</Title>
        
-        <ProductsGrid products={newProducts} /> 
+        <ProductsGrid products={newProducts} wishedProducts={wishedProducts} /> 
       </Center>
       
     </>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState ,useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import Button from './StyledBtn';
 import CartIcon from './CartIcon';
@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { black } from './Colors';
 import { CartContext } from './CartContext';
 import { toast } from 'react-hot-toast';
+import { HeartOutline } from './HeartOutline';
+import { HeartSolid } from './HeartSolid';
+import axios from 'axios';
 
 const ProductWrapper = styled.div`
 
@@ -19,6 +22,7 @@ const WhiteBox = styled(Link)`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  position: relative;
 
   img {
     max-width: 100%;
@@ -53,11 +57,42 @@ const Price = styled.div`
   }
 `;
 
-const ProductBox = ({ _id, title, description, price, images }) => {
+const HeartButton = styled.button`
+  border: 0;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  ${props => props.isWished ? `
+    color: red;  
+  ` : `
+    color: black;
+  `}
+  cursor: pointer;
+  svg {
+    width: 16px;
+  }
+`;
+
+const ProductBox = ({ _id, title, description, price, images, wishedProp=false }) => {
   const {addProduct} = useContext(CartContext)
+  const [wished, setWished] = useState(wishedProp);
+
+  const adToWishlist = (e) => {
+    e.preventDefault();
+    const nextValue = !wished;
+
+    axios.post('/api/wishlist', {product: _id,}).then(() => {});
+
+    setWished(nextValue); //prev => !prev;
+  };
+
   const msg = () => {
     toast.success(`${title} added to cart`, {position: 'top-right'})
-  }
+  };
 
   const url = '/product/'+_id;
   
@@ -66,6 +101,10 @@ const ProductBox = ({ _id, title, description, price, images }) => {
     <ProductWrapper>
       <WhiteBox href={url}>
         <div>
+          <HeartButton isWished={wished} onClick={adToWishlist}>
+            {wished ? <HeartSolid/> : <HeartOutline/>}
+          </HeartButton>
+          
           <img src={images[0]} alt='...' />
         </div>
       </WhiteBox>

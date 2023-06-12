@@ -91,7 +91,7 @@ const Header = () => {
         <Logo href={'/'}>Ecommerce</Logo>
 
           <StyledNav mobileView={mobileView}>
-            <NavLink href={'/home'}>Home</NavLink>
+            <NavLink href={'/'}>Home</NavLink>
             <NavLink href={'/products'}>All Products</NavLink>
             <NavLink href={'/categories'}>Categories</NavLink>
             <NavLink href={'/account'}>Account</NavLink>
