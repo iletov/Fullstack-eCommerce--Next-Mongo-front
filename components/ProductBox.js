@@ -77,13 +77,17 @@ const HeartButton = styled.button`
   }
 `;
 
-const ProductBox = ({ _id, title, description, price, images, wishedProp=false }) => {
+const ProductBox = ({ _id, title, description, price, images, wishedProp=false, onRemoveFromWishlisht=()=>{}, }) => {
   const {addProduct} = useContext(CartContext)
   const [wished, setWished] = useState(wishedProp);
 
   const adToWishlist = (e) => {
     e.preventDefault();
     const nextValue = !wished;
+
+    if (nextValue === false && onRemoveFromWishlisht) {
+      onRemoveFromWishlisht(_id);
+    }
 
     axios.post('/api/wishlist', {product: _id,}).then(() => {});
 

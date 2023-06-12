@@ -6,10 +6,12 @@ import ButtonLink from './ButtonLink';
 import CartIcon from './CartIcon';
 import { CartContext } from './CartContext';
 import { toast } from 'react-hot-toast';
+import { dark, grey, white } from './Colors';
+import { RevealWrapper } from 'next-reveal';
 
 const BackGround = styled.div`
-    background-color: #222;
-    color: #fff;
+    background-color: ${dark};
+    color: ${white};
     padding: 50px 0;
 `;
 
@@ -81,6 +83,7 @@ const Featured = ({ product }) => {
         <Center>
             <ColumsWrapper>
               <Column>
+              <RevealWrapper delay={150} origin='left'>
               <div>
                 <Title>{product.title}</Title>
                   <P>{product.description}</P>
@@ -96,9 +99,13 @@ const Featured = ({ product }) => {
                   </ButtonWrapper>
                   
               </div>
+              </RevealWrapper>
               </Column>
               <Column>
-                <img src='https://letov-next-ecommerce.s3.amazonaws.com/1684828690750.png' alt='...'/>
+                <RevealWrapper delay={150} origin='right'> 
+                  {/* <img src='https://letov-next-ecommerce.s3.amazonaws.com/1684828690750.png' alt='...'/> */}
+                  <img src={product.images?.[1]} alt='...'/>
+                </RevealWrapper>
               </Column>
             </ColumsWrapper>
             

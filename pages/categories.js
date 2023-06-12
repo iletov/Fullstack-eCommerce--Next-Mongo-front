@@ -109,12 +109,13 @@ export const getServerSideProps = async (context) => {
 
   console.log(allFetchedProductsId);
 
-  const { user } = await getServerSession(context.req, context.res, authOptions);
-  const wishedProducts = await WishedProducts.find({
-    userEmail: user.email,
+  const session = await getServerSession(context.req, context.res, authOptions);
+  const wishedProducts = session?.user 
+  ? await WishedProducts.find({
+    userEmail: session.user.email,
     product: allFetchedProductsId,
-  });
-
+  }) 
+  : [];
 
   return {
     props: {
