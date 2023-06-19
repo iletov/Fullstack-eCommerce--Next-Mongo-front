@@ -70,13 +70,19 @@ const Column = styled.div`
   align-items: center;
 `;
 
+const CenterImg = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Featured = ({ product }) => {
   const {addProduct} = useContext(CartContext);
 
   const addFeaturedToCart = () => {
     addProduct(product._id)
     toast.success(`${product.title} added to cart`, {position: 'top-right'})
-  }
+  };
 
   return (
     <BackGround>
@@ -103,8 +109,9 @@ const Featured = ({ product }) => {
               </Column>
               <Column>
                 <RevealWrapper delay={150} origin='right'> 
-                  {/* <img src='https://letov-next-ecommerce.s3.amazonaws.com/1684828690750.png' alt='...'/> */}
-                  <img src={product.images?.[1]} alt='...'/>
+                  <CenterImg >
+                    <img src={product.images?.[0]} alt='...'/>
+                  </CenterImg>
                 </RevealWrapper>
               </Column>
             </ColumsWrapper>
