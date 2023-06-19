@@ -9,12 +9,27 @@ import Table from '@/components/Table';
 import Input from '@/components/Input';
 import Box from '@/components/Box';
 import { RevealWrapper } from 'next-reveal';
+import { Spinner } from '@/components/Spinner';
 
 const ColumnsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-top: 40px;
+  margin: 40px 0;
+  table thead tr th:nth-child(3),
+  table tbody tr td:nth-child(3),
+  table tbody tr.subtotal td:nth-child(2) {
+    text-align: right;
+  }
+  table tbody tr.subtotal td {
+    padding: 5px 0;
+  }
+  table tbody tr.total td:nth-child(2) {
+    padding: 10px 0;
+    text-align: right;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
 
   @media screen and (min-width: 768px) {
     display: grid;
@@ -23,7 +38,7 @@ const ColumnsWrapper = styled.div`
 `;
 
 const ProductInfoCell = styled.td`
-  padding: 10px 0;
+  padding: 25px 0;
 `;
 
 const ProductImageBox = styled.div`
@@ -61,6 +76,8 @@ const CartPage = () => {
   const [streetAddress, setStreetAddress] = useState('');
   const [country, setCountry] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [shippingFee, setShippingFee] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
    useEffect(() => {
     if (cartProducts.length > 0) {
@@ -84,6 +101,9 @@ const CartPage = () => {
       setPostalCode(response.data.postalCode);
       setStreetAddress(response.data.streetAddress);
       setCountry(response.data.country);
+    });
+    axios.get('/api/settings?name=shippingFee').then(res => {
+      setShippingFee(res.data.value);
     })
    },[])
 
@@ -97,20 +117,23 @@ const CartPage = () => {
    };
 
    const goToPayment = async () => {
+    setIsLoading(true)
     const response = await axios.post('/api/checkout', {
       name, email, city, postalCode, streetAddress, country, cartProducts,
-    });
-
+    })
     if (response.data.url) {
       window.location = response.data.url;
+      setIsLoading(false);
     }
    };
 
-   let totalAmount = 0;
+   let productsTotal = 0;
    for (const productId of cartProducts) {
     const price = products.find((singleProduct) => singleProduct._id === productId)?.price || 0;
-    totalAmount += price;
+    productsTotal += price;
    };
+
+   let total = productsTotal + parseInt(shippingFee); 
 
    if (isSuccess) {
       return (
@@ -171,10 +194,17 @@ const CartPage = () => {
                     
                     </tr>
                 ))}
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>${totalAmount}</td>
+                  <tr className='subtotal'>
+                    <td colSpan={2}>Products</td>
+                    <td>${productsTotal}</td>
+                  </tr>
+                  <tr className='subtotal'>
+                    <td colSpan={2}>Shipping</td>
+                    <td>${shippingFee}</td>
+                  </tr>
+                  <tr className='total'>
+                    <td colSpan={2}>Total</td>
+                    <td>${total}</td>
                   </tr>
                 </tbody>
               </Table>
@@ -184,9 +214,13 @@ const CartPage = () => {
           
             {!!cartProducts?.length && (
               <RevealWrapper delay={150}>
+              {isLoading ? 
+              <Box>
+                <Spinner />
+              </Box> : 
               <Box>
                 <h3>Order Information</h3>
-               
+                
                   <Input 
                     type='text' 
                     placeholder='Name' 
@@ -225,13 +259,15 @@ const CartPage = () => {
                     value={country}
                     name='country' 
                     onChange={(e) => setCountry(e.target.value)} />
-                  <Button block primary 
-                    onClick={goToPayment}
-                    >
-                    Continue to Payment
-                  </Button>
-               
+                    
+                    
+                    <Button block primary 
+                      onClick={goToPayment}
+                      >
+                      Continue to Payment
+                    </Button>
               </Box>
+              }
               </RevealWrapper>
             )}
         </ColumnsWrapper>
