@@ -5,6 +5,7 @@ import Center from '@/components/Center'
 import { white } from '@/components/Colors';
 import Header from '@/components/Header'
 import ProductImages from '@/components/ProductImages';
+import { Reviews } from '@/components/Reviews';
 import Button from '@/components/StyledBtn';
 import { mongooseConnect } from '@/lib/mongoose'
 import { Product } from '@/models/Product'
@@ -41,8 +42,7 @@ const ProductPage = ({ details }) => {
     <>
       <Header />
       <Center>
-        <ColWrapper>
-          
+        <ColWrapper>   
           <Box>
             <ProductImages images={details.images} />
           </Box>
@@ -58,10 +58,9 @@ const ProductPage = ({ details }) => {
                 <Button primary onClick={() => addProduct(details._id)}><CartIcon/>Add to Cart</Button>
               </div>              
             </PriceRow>
-            
           </div>
-          
         </ColWrapper>
+        <Reviews details={details} />
       </Center>
     </>
   )

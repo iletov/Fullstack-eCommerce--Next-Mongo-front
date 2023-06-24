@@ -39,7 +39,8 @@ export const ButtonStyleCss = css`
   ${props => props.primaryOutline && css`
     background-color: transparent;
     color: ${primary};
-    padding: 0;
+    /* padding: 0; */
+    border: 1px solid ${primary};
     svg {
       height: 24px;
     }
