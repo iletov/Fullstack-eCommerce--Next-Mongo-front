@@ -67,7 +67,7 @@ const CategoriesPage = ({ mainCategories, categoriesProducts, wishedProducts=[] 
               
               <CategoryGrid>
                 {categoriesProducts[singleCategory._id].map((singleProduct) => (
-                  <ProductBox {...singleProduct} wishedProp={wishedProducts.includes(singleProduct._id)} />
+                  <ProductBox key={singleProduct._id} {...singleProduct} wishedProp={wishedProducts.includes(singleProduct._id)} />
                 ))}
                 <ShowAllSquare href={'/category/' + singleCategory._id}>
                     Show All &rarr;

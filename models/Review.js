@@ -1,12 +1,10 @@
-import { SchemaTypes, model } from "mongoose";
-
-const { Schema, models } = require("mongoose");
+import {model, models, Schema} from "mongoose";
 
 const reviewSchema = new Schema({
-  product: {type: Schema.Types.ObjectId},
   title: String,
   description: String,
   stars: Number,
+  product: {type:Schema.Types.ObjectId},
 }, {timestamps: true});
 
 export const Review = models?.Review || model('Review', reviewSchema);

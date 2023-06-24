@@ -35,7 +35,7 @@ const Price = styled.span`
   font-size: 1.5rem;
 `;
 
-const ProductPage = ({ details }) => {
+const ProductPage = ({ product }) => {
   const { addProduct } = useContext(CartContext);
 
   return (
@@ -44,23 +44,23 @@ const ProductPage = ({ details }) => {
       <Center>
         <ColWrapper>   
           <Box>
-            <ProductImages images={details.images} />
+            <ProductImages images={product.images} />
           </Box>
           <div>
-            <h3>{details.title}</h3>
-            <p>{details.description}</p>
+            <h3>{product.title}</h3>
+            <p>{product.description}</p>
 
             <PriceRow>
               <div>
-                <Price>${details.price}</Price>
+                <Price>${product.price}</Price>
               </div>
               <div>
-                <Button primary onClick={() => addProduct(details._id)}><CartIcon/>Add to Cart</Button>
+                <Button primary onClick={() => addProduct(product._id)}><CartIcon/>Add to Cart</Button>
               </div>              
             </PriceRow>
           </div>
         </ColWrapper>
-        <Reviews details={details} />
+        <Reviews product={product} />
       </Center>
     </>
   )
@@ -72,11 +72,11 @@ export async function getServerSideProps(context) {
   await mongooseConnect();
   // console.log({query:context.query})
   const { id } = context.query;
-  const details = await Product.findById(id)
+  const product = await Product.findById(id)
 
   return {
     props: {
-      details: JSON.parse(JSON.stringify(details)),
+      product: JSON.parse(JSON.stringify(product)),
     }
   }
 };

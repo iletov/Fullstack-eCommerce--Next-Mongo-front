@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Center from './Center'
 import { CartContext } from './CartContext'
 import Bars from './Bars'
-import { dark, white } from './Colors'
+import { dark, lightGray, primary, white } from './Colors'
 import { SearchIcon } from './SearchIcon'
 
 const StyledHeader = styled.header`
@@ -13,6 +13,8 @@ const StyledHeader = styled.header`
     position: fixed;
     width: 100%;
   `}
+  top: 0;
+  z-index: 10;
 `;
 
 const Logo = styled(Link)`

@@ -11,29 +11,48 @@ const Stars = styled.div`
 `;
 
 const StarWrapper = styled.button`
-  width: 1.4rem;
-  height: 1.4rem;
+  ${props => props.size === 'md' && `
+    width: 1.4rem;
+    height: 1.4rem;
+  `}
+  ${props => props.size === 'sm' && `
+    width: .8rem;
+    height: .8rem;
+  `}
+  ${props => !props.disabled && `
+    cursor: pointer;
+  `}
   padding: 0;
   border: 0;
-  /* display: inline-block; */
+  display: inline-block;
   background-color: transparent;
   color: ${primary};
-  cursor: pointer;
 `;
 
-export const StarsRating = ({ defaultHowMany=0, onChange=()=>{} }) => {
+export const StarsRating = ({ 
+                              defaultHowMany=0, 
+                              disabled, 
+                              onChange=()=>{},
+                              size='md'}) => {
   const [howMany, setHowMany] = useState(defaultHowMany);
   const fiveStars = [1,2,3,4,5];
 
   const handleStarsClick = (number) => {
-    setHowMany(number);
-    onChange(number);
+    if (disabled) {
+      return
+    }
+      setHowMany(number);
+      onChange(number);
   }
   return (
     <Stars>
       {fiveStars.map(number => (
         <>
-          <StarWrapper onClick={() => handleStarsClick(number)}>
+          <StarWrapper 
+            disabled={disabled} 
+            size={size} 
+            onClick={() => handleStarsClick(number)}
+            >
             {howMany >= number ? <StarSolid/> : <StarOutline/>}
           </StarWrapper>
         </>
