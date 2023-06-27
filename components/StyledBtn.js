@@ -36,11 +36,21 @@ export const ButtonStyleCss = css`
     }
   `}
 
-  ${props => props.primaryOutline && css`
+  ${props => props.primaryOutlineOne && css`
     background-color: transparent;
     color: ${primary};
     /* padding: 0; */
     border: 1px solid ${primary};
+    svg {
+      height: 24px;
+    }
+  `}
+
+${props => props.primaryOutline && css`
+    background-color: transparent;
+    color: ${primary};
+    padding: 0;
+    border: 1px solid transparent;
     svg {
       height: 24px;
     }

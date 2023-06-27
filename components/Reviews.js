@@ -18,7 +18,7 @@ const ColumnsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-  margin: 0 10px;
+  margin: 0;
 
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -91,7 +91,7 @@ export const Reviews = ({ product }) => {
             <Input value={title} onChange={e => setTitle(e.target.value)} placeholder='Title' />
             <Textarea value={description} onChange={e => setDescription(e.target.value)} placeholder='Give us a review...' />
             <div>
-              <Button primaryOutline onClick={submitReview} >Send</Button>
+              <Button primaryOutlineOne onClick={submitReview} >Send</Button>
             </div>
           </Box>
         </div>

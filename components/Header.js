@@ -4,21 +4,23 @@ import styled from 'styled-components'
 import Center from './Center'
 import { CartContext } from './CartContext'
 import Bars from './Bars'
-import { dark, lightGray, primary, white } from './Colors'
+import { background, dark, darkgrey, lightGray, navLinks, primary, white } from './Colors'
 import { SearchIcon } from './SearchIcon'
 
 const StyledHeader = styled.header`
-  background-color: ${dark};
+  background-color: ${white};
   ${props => props.mobileView && `
     position: fixed;
     width: 100%;
+    background-color: ${background};
   `}
   top: 0;
   z-index: 10;
+  border-top: 3px solid ${primary};
 `;
 
 const Logo = styled(Link)`
-  color:#fff;
+  color:${dark};
   text-decoration:none;
   position: relative;
   z-index: 3;
@@ -29,20 +31,22 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding: 20px 0;
 `;
+
 const StyledNav = styled.nav`
   ${props => props.mobileView ? `
   display: block;
+  background-color: ${background};
   ` : `
   display: none;
+
   `}
-  gap: 15px;
+  gap: 25px;
   position: fixed;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
   padding: 50px 20px 20px;
-  background-color: ${dark};
   @media screen and (min-width: 768px) {
     display: flex;
     position: static;
@@ -52,10 +56,17 @@ const StyledNav = styled.nav`
 
 const NavLink = styled(Link)`
   display: block;
-  color:#aaa;
+  color:${dark};
   min-width: 30px;
   text-decoration: none;
   padding: 10px 0;
+  font-weight: 500;
+  transition: ease-in-out .1s;
+  letter-spacing: 1px;
+  :hover {
+    color: ${primary};
+  }
+
   svg {
     height: 20px;
   }

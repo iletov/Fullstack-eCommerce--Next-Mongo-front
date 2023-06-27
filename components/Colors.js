@@ -1,4 +1,5 @@
-export const primary = '#5542f6';
+export const primary = '#47A992' //'#00425A' //'#5542f6';
+export const background = '#002349'
 export const white = '#fff';
 export const black = '#000';
 export const dark = '#222';
@@ -6,3 +7,4 @@ export const lightGray= '#2227';
 export const grey = '#ccc';
 export const darkgrey = '#444';
 export const lines = '#9994';
+export const boxGrey = '#DDE6ED';

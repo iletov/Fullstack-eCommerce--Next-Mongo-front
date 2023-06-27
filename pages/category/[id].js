@@ -1,5 +1,5 @@
 import Center from '@/components/Center'
-import { dark, grey, lightGray } from '@/components/Colors'
+import { dark, grey, lightGray, primary, white } from '@/components/Colors'
 import Header from '@/components/Header'
 import ProductsGrid from '@/components/ProductsGrid'
 import { Spinner } from '@/components/Spinner'
@@ -22,17 +22,17 @@ const FiltersWrapper = styled.div`
 `;
 
 const Filter = styled.div`
-  background-color: #ddd;
+  background-color: ${primary};
   padding: 5px 10px;
   border-radius: 5px;
   display: flex;
   gap: 10px;
-  color: ${lightGray};
+  color: ${white};
   select {
-    background-color: transparent;
+    background-color: ${primary};
     border: 0;
     font-size: inherit;
-    color: ${lightGray};
+    color: ${white};
   }
 `;
 

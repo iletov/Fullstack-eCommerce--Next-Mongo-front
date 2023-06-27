@@ -9,6 +9,8 @@ import { debounce } from 'lodash'
 import { Spinner } from '@/components/Spinner'
 import image1 from '@/assets/background.jpg'
 import Image from 'next/image'
+import { grey } from './Colors'
+import { darkgrey } from './Colors'
 
 const SearchInput = styled(Input)`
   padding: 10px;
@@ -19,10 +21,21 @@ const SearchInput = styled(Input)`
     }
 `;
 
-const search = () => {
+const SearchedProductsWrap = styled.div`
+  margin-bottom: 100px;
+`;
+
+const NoFound = styled.h3`
+  margin: 10px 0 50px;
+  font-weight: 400;
+  color: ${darkgrey};
+`;
+
+const SearchHome = () => {
   const [phrase, setPhrase] = useState('');
-  const [products, setProducts] = useState('');
-  const debouncedSearch = useCallback(debounce(phrase => searchProducts(phrase), 500),[]);
+  const [products, setProducts] = useState([]);
+  const debouncedSearch = useCallback(
+    debounce(phrase => searchProducts(phrase), 500), []);
   const [isLoading, setIsLoading] = useState(false);
 
 
@@ -30,16 +43,17 @@ const search = () => {
     if (phrase.length > 0) {
       setIsLoading(true);
       debouncedSearch(phrase);
+      // searchProducts(phrase)
     } else {
-      setProducts('');
-      debouncedSearch(phrase);
+      debouncedSearch()
+      setProducts([]);
     }
   }, [phrase])
 
   const searchProducts = (phrase) => {
     axios.get('api/products?phrase=' + encodeURIComponent(phrase))
-      .then(result => {
-        setProducts(result.data);
+      .then(res => {
+        setProducts(res.data);
         setIsLoading(false);
         // console.log(result.data);
       })
@@ -47,7 +61,6 @@ const search = () => {
 
   return (
     <>
-      <Header/>
       <Center>
         <SearchInput 
           autoFocus 
@@ -56,19 +69,19 @@ const search = () => {
           onChange={(e) => setPhrase(e.target.value)}
           />
           {!isLoading && phrase !== '' && products.length === 0 && (
-            <h2>No products match for "{phrase}"</h2>
+            <NoFound>No products match for "{phrase}"</NoFound>
           )}
           {isLoading && (
             <Spinner />
           )}
           {!isLoading && products.length > 0 && (
-            <ProductsGrid products={products}></ProductsGrid>
+            <SearchedProductsWrap>
+              <ProductsGrid products={products}></ProductsGrid>
+            </SearchedProductsWrap>
           )}
-          
       </Center>
-
     </>
   )
 }
 
-export default search
+export default SearchHome

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Button from './StyledBtn';
 import CartIcon from './CartIcon';
 import Link from 'next/link';
-import { black } from './Colors';
+import { black, boxGrey, dark, white } from './Colors';
 import { CartContext } from './CartContext';
 import { toast } from 'react-hot-toast';
 import { HeartOutline } from './HeartOutline';
@@ -15,18 +15,23 @@ const ProductWrapper = styled.div`
 `;
 
 const WhiteBox = styled(Link)`
-  background-color: #fff;
+  background-color: ${white};
   padding: 20px;
   height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
 
   img {
     max-width: 100%;
     max-height: 80px;
+    transition: ease-in-out .3s;
+  }
+
+  :hover img{
+    transform: scale(1.15);
   }
 `;
 

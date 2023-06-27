@@ -1,17 +1,19 @@
 import Center from '@/components/Center'
-import { black, dark, grey, primary } from '@/components/Colors'
 import Header from '@/components/Header'
-import ProductBox from '@/components/ProductBox'
 import { Category } from '@/models/Category'
 import { Product } from '@/models/Product'
-import Link from 'next/link'
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
 import { WishedProducts } from '@/models/WishedProducts'
 import { mongooseConnect } from '@/lib/mongoose'
+import styled from 'styled-components';
 
+import Link from 'next/link';
+
+import { RevealWrapper } from 'next-reveal';
+import ProductBox from '@/components/ProductBox'
+import { dark, grey, white } from '@/components/Colors'
 
 const CategoryGrid = styled.div`
   display: grid;
@@ -44,13 +46,23 @@ const ShowAllSquare = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 160px;
-  background-color: ${grey};
+  /* height: 160px; */
+  background-color: transparent;
+  /* background: rgb(2,24,31); */
+  /* background: linear-gradient(87deg, rgba(2,24,31,1) 30%, rgba(5,54,92,1) 70%); */
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
   color: ${dark};
   text-decoration: none;
+  p {
+    opacity: .8;
+  }
 `;
 
-const CategoriesPage = ({ mainCategories, categoriesProducts, wishedProducts=[] }) => {
+
+
+const CategoriesPage = ({ mainCategories, categoriesProducts, singleCategoryProduct, wishedProducts=[] }) => {  
   return (
     <>
       <Header/>
@@ -58,23 +70,28 @@ const CategoriesPage = ({ mainCategories, categoriesProducts, wishedProducts=[] 
           <h3>Categories</h3>
           {mainCategories?.map((singleCategory, index) => (
             <CategoryWrapper key={index}>
+              
               <CategoryTitle>
                 <h2>{singleCategory.name}</h2>
                 <div>
                   <StyledLink href={'/category/' + singleCategory._id}>Show All</StyledLink>
                 </div>
               </CategoryTitle>
-              
-              <CategoryGrid>
-                {categoriesProducts[singleCategory._id].map((singleProduct) => (
-                  <ProductBox key={singleProduct._id} {...singleProduct} wishedProp={wishedProducts.includes(singleProduct._id)} />
-                ))}
-                <ShowAllSquare href={'/category/' + singleCategory._id}>
-                    Show All &rarr;
-                </ShowAllSquare>
-              </CategoryGrid>
+                <CategoryGrid>
+                  {categoriesProducts[singleCategory._id].map((singleProduct) => (
+                    <RevealWrapper delay={index*50} key={singleProduct._id}>
+                      <ProductBox key={singleProduct._id} {...singleProduct} wishedProp={wishedProducts.includes(singleProduct._id)} />
+                    </RevealWrapper> 
+                  ))}
+                  <RevealWrapper delay={50}>
+                    <ShowAllSquare href={'/category/' + singleCategory._id}>
+                      <p>Show All &rarr;</p>
+                    </ShowAllSquare>
+                  </RevealWrapper>
+                </CategoryGrid>
             </CategoryWrapper>
           ))}
+        
         </Center>
       
     </>
@@ -90,7 +107,10 @@ export const getServerSideProps = async (context) => {
   const mainCategories = categories.filter((cat) => !cat.parent)
   
   const categoriesProducts = {}; //catId => [products]
+  const singleCategoryProduct = {};
+  const allSingleFetchedProductsId = [];
   const allFetchedProductsId = [];
+
   for (const loopCat of mainCategories) {
     const mainCategoryId = loopCat._id.toString();
 
@@ -103,11 +123,18 @@ export const getServerSideProps = async (context) => {
     const products = await Product.find(
       {category: categoriesIds}, null, {limit: 3, sort: {'_id': -1}});
     
+    const singleProduct = await Product.find(
+      {category: categoriesIds}, null, {limit: 1, sort: {'_id': -1}} )
+
     allFetchedProductsId.push(...products.map(prod => prod._id.toString()))
     categoriesProducts[loopCat._id] = products;
-  }
+    
+    allSingleFetchedProductsId.push(...singleProduct.map(item => item._id.toString()))
+    singleCategoryProduct[loopCat._id] = singleProduct;
 
-  console.log(allFetchedProductsId);
+  } 
+
+  // console.log(allFetchedProductsId);
 
   const session = await getServerSession(context.req, context.res, authOptions);
   const wishedProducts = session?.user 
@@ -121,6 +148,7 @@ export const getServerSideProps = async (context) => {
     props: {
       mainCategories: JSON.parse(JSON.stringify(mainCategories)),
       categoriesProducts: JSON.parse(JSON.stringify(categoriesProducts)),
+      singleCategoryProduct: JSON.parse(JSON.stringify(singleCategoryProduct)),
       wishedProducts: wishedProducts.map((item) => item.product.toString()),
     },
   };

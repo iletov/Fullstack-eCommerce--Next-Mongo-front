@@ -150,7 +150,7 @@ const AccountPage = () => {
             </RevealWrapper>
             </div>
             <div>
-            <RevealWrapper delay={150}>
+            <RevealWrapper delay={50}>
                <Box>
                 <h3>Account Details</h3>
                 {!addressLoaded && (

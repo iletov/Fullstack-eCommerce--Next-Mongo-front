@@ -6,13 +6,15 @@ import ButtonLink from './ButtonLink';
 import CartIcon from './CartIcon';
 import { CartContext } from './CartContext';
 import { toast } from 'react-hot-toast';
-import { dark, grey, white } from './Colors';
+import { background, dark, white } from './Colors';
 import { RevealWrapper } from 'next-reveal';
 
+
 const BackGround = styled.div`
-    background-color: ${dark};
-    color: ${white};
-    padding: 50px 0;
+  background: rgb(2,24,31);
+  background: linear-gradient(87deg, rgba(2,24,31,1) 50%, rgba(5,54,92,1) 100%);
+  padding: 125px 0 50px 0;
+  color: ${white};
 `;
 
 const Title = styled.h1`
@@ -37,7 +39,7 @@ const ColumsWrapper = styled.div`
     
     img {
       max-width: 100%;
-      max-height: 200px;
+      max-height: 250px;
       display: block;
       margin: 0 auto;
     }
@@ -86,10 +88,11 @@ const Featured = ({ product }) => {
 
   return (
     <BackGround>
+
         <Center>
             <ColumsWrapper>
               <Column>
-              <RevealWrapper delay={150} origin='left'>
+              <RevealWrapper delay={0} origin='left'>
               <div>
                 <Title>{product.title}</Title>
                   <P>{product.description}</P>
@@ -108,7 +111,7 @@ const Featured = ({ product }) => {
               </RevealWrapper>
               </Column>
               <Column>
-                <RevealWrapper delay={150} origin='right'> 
+                <RevealWrapper delay={0} origin='right'> 
                   <CenterImg >
                     <img src={product.images?.[0]} alt='...'/>
                   </CenterImg>
