@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { primary, white } from './Colors';
+import { grey, primary, white } from './Colors';
 
 export const ButtonStyleCss = css`
   border: 0;
@@ -11,6 +11,7 @@ export const ButtonStyleCss = css`
   align-items: center;
   text-decoration: none;
   justify-content: center;
+  background-color: ${grey};
   svg {
     height: 16px;
   }

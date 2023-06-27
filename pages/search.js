@@ -7,15 +7,18 @@ import axios from 'axios'
 import ProductsGrid from '@/components/ProductsGrid'
 import { debounce } from 'lodash'
 import { Spinner } from '@/components/Spinner'
-import image1 from '@/assets/background.jpg'
-import Image from 'next/image'
+import { primary } from '@/components/Colors'
 
 const SearchInput = styled(Input)`
   padding: 10px;
-  border-radius: 0px;
+  border-radius: 5px;
   margin: 30px 0;
+  transition: ease-in-out .25s;
   :focus {
     outline: none;
+    border: 1px solid ${primary};
+    padding: 15px;
+    transition: ease-in-out .25s;
     }
 `;
 
@@ -32,7 +35,6 @@ const search = () => {
       debouncedSearch(phrase);
     } else {
       setProducts('');
-      debouncedSearch(phrase);
     }
   }, [phrase])
 
@@ -42,7 +44,7 @@ const search = () => {
         setProducts(result.data);
         setIsLoading(false);
         // console.log(result.data);
-      })
+    })
   };
 
   return (
@@ -62,7 +64,7 @@ const search = () => {
             <Spinner />
           )}
           {!isLoading && products.length > 0 && (
-            <ProductsGrid products={products}></ProductsGrid>
+            <ProductsGrid products={products} ></ProductsGrid>
           )}
           
       </Center>

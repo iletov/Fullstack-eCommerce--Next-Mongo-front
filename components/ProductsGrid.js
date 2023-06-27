@@ -17,7 +17,7 @@ const ProductsGrid = ({products, wishedProducts=[]}) => {
   return (
     <StyledProductsGrid>
       {products?.length > 0 && products?.map((item, index) => (
-          <RevealWrapper key={item._id} delay={index*50}>
+          <RevealWrapper key={item._id} delay={index*100}>
             <ProductBox {...item} wishedProp={wishedProducts.includes(item._id)} />
           </RevealWrapper>
             

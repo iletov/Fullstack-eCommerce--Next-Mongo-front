@@ -9,15 +9,19 @@ import { debounce } from 'lodash'
 import { Spinner } from '@/components/Spinner'
 import image1 from '@/assets/background.jpg'
 import Image from 'next/image'
-import { grey } from './Colors'
+import { grey, primary } from './Colors'
 import { darkgrey } from './Colors'
 
 const SearchInput = styled(Input)`
   padding: 10px;
-  border-radius: 0px;
+  border-radius: 5px;
   margin: 30px 0;
+  transition: ease-in-out .25s;
   :focus {
     outline: none;
+    border: 1px solid ${primary};
+    padding: 15px;
+    transition: ease-in-out .25s;
     }
 `;
 

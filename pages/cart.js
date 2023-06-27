@@ -15,7 +15,7 @@ const ColumnsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin: 40px 0;
+  margin: 40px 20px;
   table thead tr th:nth-child(3),
   table tbody tr td:nth-child(3),
   table tbody tr.subtotal td:nth-child(2) {
@@ -23,6 +23,15 @@ const ColumnsWrapper = styled.div`
   }
   table tbody tr.subtotal td {
     padding: 5px 0;
+  }
+  table tbody tr td:nth-child(2) {
+    min-width: 90px;
+    button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      opacity: .8;
+    }
   }
   table tbody tr.total td:nth-child(2) {
     padding: 10px 0;
@@ -133,7 +142,7 @@ const CartPage = () => {
     productsTotal += price;
    };
 
-   let total = productsTotal + parseInt(shippingFee); 
+   let total = (productsTotal + parseInt(shippingFee)).toFixed(2); 
 
    if (isSuccess) {
       return (
@@ -187,7 +196,7 @@ const CartPage = () => {
                           <QuantityLabel>
                             {cartProducts.filter(id => id === product._id).length} {/* Quantity */}
                           </QuantityLabel>
-                        <Button onClick={() => plussProduct(product._id)} >+</Button>
+                        <Button primary onClick={() => plussProduct(product._id)} >+</Button>
                       </td>
                       
                       <td>${cartProducts.filter(id => id === product._id).length * product.price}</td>  {/* Quantity x Price */}             
@@ -196,7 +205,7 @@ const CartPage = () => {
                 ))}
                   <tr className='subtotal'>
                     <td colSpan={2}>Products</td>
-                    <td>${productsTotal}</td>
+                    <td>${productsTotal.toFixed(2)}</td>
                   </tr>
                   <tr className='subtotal'>
                     <td colSpan={2}>Shipping</td>

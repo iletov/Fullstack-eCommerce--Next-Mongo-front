@@ -2,7 +2,7 @@ import { CartContextProvider } from "@/components/CartContext";
 import { Toaster } from "react-hot-toast";
 import { createGlobalStyle } from "styled-components"
 import { SessionProvider } from "next-auth/react"
-import { boxGrey, primary, white } from "@/components/Colors";
+import { background, boxGrey, primary, white } from "@/components/Colors";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: system-ui, 'Roboto', sans-serif;
-    background-color: ${boxGrey};
+    background-color: ${background};
   }
 
   hr{

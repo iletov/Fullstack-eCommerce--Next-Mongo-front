@@ -4,23 +4,14 @@ import Link from 'next/link';
 import { background, boxGrey, dark, grey, primary, white } from './Colors';
 import Button from './StyledBtn';
 import Center from './Center';
+import { RevealWrapper } from 'next-reveal';
 
-
-const CategoryGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-
-  @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-`;
 
 const CategoryWrapper = styled.div`
   margin: 40px 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 30px;
 
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
@@ -30,6 +21,11 @@ const CategoryWrapper = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${white};
+  button {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
 `;
 
 const WhiteBox = styled.div`
@@ -48,6 +44,7 @@ const WhiteBox = styled.div`
     transition: ease-in-out .1s;
     max-width: 100%;
     max-height: 100px;
+    margin-bottom: 5px;
   }
 
   img:hover {
@@ -61,6 +58,7 @@ export const CategoryBox = ({ mainCategories, singleCategoryProduct }) => {
     <Center>
     <CategoryWrapper>
       {mainCategories?.map((singleCategory, index) => (
+          <RevealWrapper delay={index*200} origin='left'>
             <WhiteBox key={index} >
               <StyledLink href={'/category/' + singleCategory._id}>
                 <Button primaryOutline >{singleCategory.name}</Button>
@@ -73,6 +71,7 @@ export const CategoryBox = ({ mainCategories, singleCategoryProduct }) => {
                   </div>
               ))}
             </WhiteBox>
+            </RevealWrapper>
           ))}
     </CategoryWrapper>
     </Center>
