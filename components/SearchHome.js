@@ -7,8 +7,6 @@ import axios from 'axios'
 import ProductsGrid from '@/components/ProductsGrid'
 import { debounce } from 'lodash'
 import { Spinner } from '@/components/Spinner'
-import image1 from '@/assets/background.jpg'
-import Image from 'next/image'
 import { grey, primary } from './Colors'
 import { darkgrey } from './Colors'
 

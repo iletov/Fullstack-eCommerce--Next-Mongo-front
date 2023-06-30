@@ -62,7 +62,7 @@ const ShowAllSquare = styled(Link)`
 
 
 
-const CategoriesPage = ({ mainCategories, categoriesProducts, singleCategoryProduct, wishedProducts=[] }) => {  
+const CategoriesPage = ({ mainCategories, categoriesProducts, wishedProducts=[] }) => {  
   return (
     <>
       <Header/>
@@ -106,9 +106,10 @@ export const getServerSideProps = async (context) => {
   const categories = await Category.find({});
   const mainCategories = categories.filter((cat) => !cat.parent)
   
-  const categoriesProducts = {}; //catId => [products]
   const singleCategoryProduct = {};
   const allSingleFetchedProductsId = [];
+
+  const categoriesProducts = {}; //catId => [products]
   const allFetchedProductsId = [];
 
   for (const loopCat of mainCategories) {

@@ -75,6 +75,10 @@ const CityHolder = styled.div`
 `;
 
 
+const item = {
+  price: [100, 150, 200],
+}
+
 const CartPage = () => {
   const {cartProducts, addProduct, removeProduct, clearCart} = useContext(CartContext);
   const [products, setProducts] = useState([]);
@@ -86,7 +90,7 @@ const CartPage = () => {
   const [country, setCountry] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [shippingFee, setShippingFee] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);  
 
    useEffect(() => {
     if (cartProducts.length > 0) {
@@ -199,8 +203,7 @@ const CartPage = () => {
                         <Button primary onClick={() => plussProduct(product._id)} >+</Button>
                       </td>
                       
-                      <td>${cartProducts.filter(id => id === product._id).length * product.price}</td>  {/* Quantity x Price */}             
-                    
+                      <td>${cartProducts.filter(id => id === product._id).length * product.price}</td>             
                     </tr>
                 ))}
                   <tr className='subtotal'>

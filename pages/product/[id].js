@@ -10,7 +10,7 @@ import Button from '@/components/StyledBtn';
 import { mongooseConnect } from '@/lib/mongoose'
 import { Product } from '@/models/Product'
 import Image from 'next/image';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 const ColWrapper = styled.div`
@@ -38,7 +38,7 @@ const Price = styled.span`
 const ProductPage = ({ product }) => {
   const { addProduct } = useContext(CartContext);
 
-  return (
+return (
     <>
       <Header />
       <Center>
@@ -49,7 +49,7 @@ const ProductPage = ({ product }) => {
           <div>
             <h3>{product.title}</h3>
             <p>{product.description}</p>
-
+                  
             <PriceRow>
               <div>
                 <Price>${product.price}</Price>

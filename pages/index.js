@@ -10,8 +10,9 @@ import { Settings } from '@/models/Settings';
 import SearchHome from '@/components/SearchHome';
 import { CategoryBox } from '@/components/CategoryBox';
 import { Category } from '@/models/Category';
+import { Test } from '@/components/Test';
 
-export default function HomePage({ featuredProduct, newProducts, wishedNewProducts, mainCategories, singleCategoryProduct }) {
+export default function HomePage({ featuredProduct, newProducts, wishedNewProducts, wishedProducts, mainCategories, singleCategoryProduct, categoriesProducts }) {
   // console.log({newProducts})
   return (
     <div>
@@ -19,7 +20,8 @@ export default function HomePage({ featuredProduct, newProducts, wishedNewProduc
       <Featured product={featuredProduct}/>
       <CategoryBox mainCategories={mainCategories} singleCategoryProduct={singleCategoryProduct} />
       <SearchHome />
-      <NewProducts newProducts={newProducts} wishedProducts={wishedNewProducts} />
+      <Test mainCategories={mainCategories} categoriesProducts={categoriesProducts} wishedProducts={wishedProducts} />
+      {/* <NewProducts newProducts={newProducts} wishedProducts={wishedNewProducts} /> */}
     </div>
   )
 }
@@ -32,6 +34,9 @@ export async function getServerSideProps(context) {
   const singleCategoryProduct = {};
   const allSingleFetchedProductsId = [];
 
+  const categoriesProducts = {}; //catId => [products]
+  const allFetchedProductsId = [];
+
   for (const loopCat of mainCategories) {
     const mainCategoryId = loopCat._id.toString();
 
@@ -41,12 +46,26 @@ export async function getServerSideProps(context) {
 
     const categoriesIds = [mainCategoryId, ...childCategoryId];  
     
+    const products = await Product.find(
+      {category: categoriesIds}, null, {limit: 1, sort: {'_id': -1}});
+
     const singleProduct = await Product.find(
       {category: categoriesIds}, null, {limit: 1, sort: {'_id': -1}} )
     
     allSingleFetchedProductsId.push(...singleProduct.map(item => item._id.toString()))
     singleCategoryProduct[loopCat._id] = singleProduct;
+
+    allFetchedProductsId.push(...products.map(prod => prod._id.toString()))
+    categoriesProducts[loopCat._id] = products;
   } 
+
+  const sessionOne = await getServerSession(context.req, context.res, authOptions);
+  const wishedProducts = sessionOne?.user 
+  ? await WishedProducts.find({
+    userEmail: sessionOne.user.email,
+    product: allFetchedProductsId,
+  }) 
+  : [];
 
   //----------------------------------------------
   const featuredProductSettings = await Settings.findOne({name:'featuredProductId'});
@@ -68,7 +87,9 @@ export async function getServerSideProps(context) {
       wishedNewProducts: wishedNewProducts.map((item) => item.product.toString()),
       //----------------------------------
       mainCategories: JSON.parse(JSON.stringify(mainCategories)),
+      categoriesProducts: JSON.parse(JSON.stringify(categoriesProducts)),
       singleCategoryProduct: JSON.parse(JSON.stringify(singleCategoryProduct)),
+      wishedProducts: wishedProducts.map((item) => item.product.toString()),
     },
   };
 };

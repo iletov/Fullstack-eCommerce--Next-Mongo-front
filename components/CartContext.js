@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 
 
 export const CartContext = createContext({});
 
 export const CartContextProvider = ({ children }) => {
+
   const storage = typeof window !== "undefined" ? window.localStorage : null;
 
   const [cartProducts, setCartProducts] = useState([]);

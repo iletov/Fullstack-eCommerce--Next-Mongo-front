@@ -91,7 +91,7 @@ export const Reviews = ({ product }) => {
             <Input value={title} onChange={e => setTitle(e.target.value)} placeholder='Title' />
             <Textarea value={description} onChange={e => setDescription(e.target.value)} placeholder='Give us a review...' />
             <div>
-              <Button primaryOutlineOne onClick={submitReview} >Send</Button>
+              <Button primaryOutlineOne onClick={submitReview}>Send</Button>
             </div>
           </Box>
         </div>
