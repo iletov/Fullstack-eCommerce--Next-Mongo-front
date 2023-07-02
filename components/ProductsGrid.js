@@ -20,7 +20,6 @@ const ProductsGrid = ({products, wishedProducts=[]}) => {
           <RevealWrapper key={item._id} delay={index*100}>
             <ProductBox {...item} wishedProp={wishedProducts.includes(item._id)} />
           </RevealWrapper>
-            
           ))}
     </StyledProductsGrid>
   )

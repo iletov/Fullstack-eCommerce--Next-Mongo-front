@@ -6,9 +6,8 @@ import Button from './StyledBtn';
 import Center from './Center';
 import { RevealWrapper } from 'next-reveal';
 
-
 const CategoryWrapper = styled.div`
-  margin: 40px 0;
+  margin-top: 100px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
@@ -18,15 +17,6 @@ const CategoryWrapper = styled.div`
   }
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${white};
-  button {
-    font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-  }
-`;
 
 const WhiteBox = styled.div`
   background-color: ${white};
@@ -53,18 +43,28 @@ const WhiteBox = styled.div`
 
 `;
 
-export const CategoryBox = ({ mainCategories, singleCategoryProduct }) => {
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${white};
+  button {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+`;
+
+export const CategoryBox = ({ mainCategories, categoriesProducts }) => {
   return (
     <Center>
     <CategoryWrapper>
       {mainCategories?.map((singleCategory, index) => (
-          <RevealWrapper delay={index*200} origin='left'>
+          <RevealWrapper delay={index*100} duration={1200}>
             <WhiteBox key={index} >
               <StyledLink href={'/category/' + singleCategory._id}>
                 <Button primaryOutline >{singleCategory.name}</Button>
               </StyledLink>
               
-              {singleCategoryProduct[singleCategory._id].map((singleProduct) => (
+              {categoriesProducts[singleCategory._id].map((singleProduct) => (
                   <div>
                     {/* <BoxTitle>{singleCategory.name}</BoxTitle> */}
                     <Link href={'/category/' + singleCategory._id}><img src={...singleProduct.images[0]} /></Link>

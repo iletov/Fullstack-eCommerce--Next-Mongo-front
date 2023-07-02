@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { dark, darkgrey, grey } from "./Colors";
+import { Spinner } from "./Spinner";
 
 const StyledOrder = styled.div`
   margin: 5px 0;
@@ -27,8 +28,11 @@ const Address = styled.div`
   line-height: 1.2rem;
 `;
 
+
 const SingleOrder = ({ line_items, createdAt, ...restProps }) => {
+  
   return (
+    <>
     <StyledOrder>
       
       <div>
@@ -51,6 +55,7 @@ const SingleOrder = ({ line_items, createdAt, ...restProps }) => {
         </div>
 
     </StyledOrder>
+    </>
   )
 }
 

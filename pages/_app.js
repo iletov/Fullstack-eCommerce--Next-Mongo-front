@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { createGlobalStyle } from "styled-components"
 import { SessionProvider } from "next-auth/react"
 import { background, boxGrey, primary, white } from "@/components/Colors";
+import '../styles/pagination.css'
 
 const GlobalStyles = createGlobalStyle`
 

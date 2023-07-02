@@ -1,0 +1,32 @@
+.paginationBtns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.paginationBtns a {
+  padding: 4px 12px;
+  border-radius: 8%;
+  border: 1px solid #9994;
+}
+
+.paginationBtns a:hover {
+  background-color: #7c0043;
+  color: aliceblue;
+}
+
+.paginationActive a {
+  background-color: #7c0043;
+  color: aliceblue;
+}
+
+.prevBtn, .nextBtn {
+  background-color: aliceblue;
+  color: #7c0043;
+}
+

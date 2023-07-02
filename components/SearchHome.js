@@ -7,24 +7,34 @@ import axios from 'axios'
 import ProductsGrid from '@/components/ProductsGrid'
 import { debounce } from 'lodash'
 import { Spinner } from '@/components/Spinner'
-import { grey, primary } from './Colors'
+import { dark, grey, primary } from './Colors'
 import { darkgrey } from './Colors'
+import Image from 'next/image'
+import bennman from '@/assets/Benman.jpg'
+
+const ImgWrapper = styled.div`
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+`;
+
 
 const SearchInput = styled(Input)`
-  padding: 10px;
-  border-radius: 5px;
-  margin: 30px 0;
+  padding: 15px;
+  border-radius: 20px;
   transition: ease-in-out .25s;
+  position: relative;
+  width: 100%;
   :focus {
     outline: none;
+    /* width: 100%; */
     border: 1px solid ${primary};
-    padding: 15px;
     transition: ease-in-out .25s;
     }
 `;
 
 const SearchedProductsWrap = styled.div`
-  margin-bottom: 100px;
+  margin: 40px 0 100px;
 `;
 
 const NoFound = styled.h3`
@@ -32,6 +42,18 @@ const NoFound = styled.h3`
   font-weight: 400;
   color: ${darkgrey};
 `;
+
+// const Herro = styled.div`
+//   width: 100%;
+//   height: 35vh;
+//   position: relative;
+//   background-color: ${dark};
+// 	background-size: cover;
+// 	background-blend-mode: darken;
+//   display: flex;
+//   align-items: center;
+//   margin-bottom: 40px;
+// `;
 
 const SearchHome = () => {
   const [phrase, setPhrase] = useState('');
@@ -62,27 +84,30 @@ const SearchHome = () => {
   };
 
   return (
-    <>
-      <Center>
-        <SearchInput 
-          autoFocus 
-          placeholder='Search' 
-          value={phrase}
-          onChange={(e) => setPhrase(e.target.value)}
-          />
-          {!isLoading && phrase !== '' && products.length === 0 && (
-            <NoFound>No products match for "{phrase}"</NoFound>
-          )}
-          {isLoading && (
-            <Spinner />
-          )}
-          {!isLoading && products.length > 0 && (
-            <SearchedProductsWrap>
-              <ProductsGrid products={products}></ProductsGrid>
-            </SearchedProductsWrap>
-          )}
-      </Center>
-    </>
+    <Center>
+            <ImgWrapper>
+              <SearchInput 
+              autoFocus 
+              placeholder='Search' 
+              value={phrase}
+              onChange={(e) => setPhrase(e.target.value)}
+              />
+            </ImgWrapper>
+          
+            {!isLoading && phrase !== '' && products.length === 0 && (
+              <NoFound>No products match for "{phrase}"</NoFound>
+            )}
+            {isLoading && (
+              <Spinner />
+            )}
+            {!isLoading && products.length > 0 && (
+              <SearchedProductsWrap>
+                <ProductsGrid products={products}></ProductsGrid>
+              </SearchedProductsWrap>
+            )}
+            
+          
+    </Center>
   )
 }
 

@@ -12,12 +12,19 @@ import { Spinner } from '@/components/Spinner';
 import ProductBox from '@/components/ProductBox';
 import Tabs from '@/components/Tabs';
 import SingleOrder from '@/components/SingleOrder';
+import ReactPaginate from 'react-paginate';
+
+
 
 const ColumnWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr;
   gap: 30px;
   margin: 40px 0;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
 `;
 
 const CityHolder = styled.div`
@@ -44,6 +51,7 @@ const AccountPage = () => {
   const [wishedProducts, setWishedProducts] = useState([]);
   const [activeTab, setActiveTab] = useState('Orders');
   const [orders, setOrders] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
 
   const {data: session} = useSession();
   // console.log(session)
@@ -98,6 +106,16 @@ const AccountPage = () => {
     })
   };
 
+
+  //---Pagination
+  const ordersPerPage = 5;
+  const pagesVisited = pageNumber * ordersPerPage;
+  const sliceOrders = pagesVisited + ordersPerPage;
+  const pageCount = Math.ceil(orders.length / ordersPerPage);
+  const changePage = ({selected}) => {
+      setPageNumber(selected)
+  }
+
   return (
     <>
       <Header/>
@@ -117,23 +135,39 @@ const AccountPage = () => {
                   onChange={setActiveTab} />
                     {activeTab === 'Orders' && (
                       <>
-                        {!ordersLoaded && (
-                          <Spinner />
-                        )}
+                        {!ordersLoaded && ( <Spinner /> )}
                         {ordersLoaded && (
                           <div>
-                          {orders.length > 0 && orders.map((order, index) => (
-                            <SingleOrder {...order} key={index}/>
+                          {orders.length > 0 && 
+                            orders
+                              .slice(pagesVisited, sliceOrders)
+                              .map((order, index) => (
+                                <SingleOrder {...order} key={index}/>
                           ))}
+                            
+                           
+                              <ReactPaginate 
+                                previousLabel={'Prev'} 
+                                nextLabel={'Next'}
+                                pageCount={pageCount}
+                                onPageChange={changePage}
+                                containerClassName={'paginationBtns'}
+                                previousLinkClassName={'prevBtn'}
+                                nextLinkClassName={'nextBtn'}
+                                disabledClassName={'paginationDisabled'}
+                                activeClassName={'paginationActive'}
+                              />
+                           
+                              
+                            
+                            
                           </div>
                         )}
                       </>
                     )}
                     {activeTab === 'Wishlist' && (
                       <>
-                      {!wishListLoaded && (
-                        <Spinner />
-                      )}
+                      {!wishListLoaded && ( <Spinner /> )}
                         {wishListLoaded && (
                           <WishedProductsGrid>
                             {wishedProducts.length > 0 && wishedProducts.map((wishedItem, index) => (

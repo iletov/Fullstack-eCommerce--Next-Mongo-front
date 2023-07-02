@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Center from './Center';
 import ProductsGrid from './ProductsGrid';
+import { RevealWrapper } from 'next-reveal';
 
 
 const Title = styled.h2`
@@ -21,8 +22,9 @@ const NewProducts = ({ newProducts, wishedProducts }) => {
     <>
       <Center>
         <Title> New Products</Title>
-       
+ 
         <ProductsGrid products={newProducts} wishedProducts={wishedProducts} /> 
+
       </Center>
       
     </>

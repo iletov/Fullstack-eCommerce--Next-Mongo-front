@@ -104,7 +104,7 @@ const ProductBox = ({ _id, title, description, price, images, wishedProp=false, 
   };
 
   const url = '/product/'+_id;
-  
+
   return (
 
     <ProductWrapper>
@@ -119,7 +119,7 @@ const ProductBox = ({ _id, title, description, price, images, wishedProp=false, 
       </WhiteBox>
         <ProductInfoBox>
           <div>
-            <Title href={url}>{title}</Title>
+            <Title href={url}>{title.slice(0, 30)}</Title>
           </div>
           <PriceBox>
             <Price>${price}</Price>

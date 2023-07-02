@@ -6,6 +6,7 @@ import { Spinner } from '@/components/Spinner'
 import { Category } from '@/models/Category'
 import { Product } from '@/models/Product'
 import axios from 'axios'
+import { RevealWrapper } from 'next-reveal'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -22,18 +23,27 @@ const FiltersWrapper = styled.div`
 `;
 
 const Filter = styled.div`
-  background-color: ${primary};
+  background-color: transparent;
   padding: 5px 10px;
   border-radius: 5px;
   display: flex;
   gap: 10px;
-  color: ${white};
+  color: ${primary};
+
   select {
-    background-color: ${primary};
-    border: 0;
+   background-color: transparent;
+    border: 1;
+    padding: 4px 6px;
+    border-radius: 6%;
     font-size: inherit;
-    color: ${white};
+    color: ${primary};
+    
+  option {
+    padding: 20px;
+  };
   }
+
+  
 `;
 
 const CategoryPage = ({ category, subCategories, products:originalProducts }) => {
@@ -121,7 +131,10 @@ const CategoryPage = ({ category, subCategories, products:originalProducts }) =>
         {!loadingProducts && (
           <div>
             {products.length > 0 ? 
-              <ProductsGrid products={...products}></ProductsGrid>
+              <RevealWrapper delay={150}>
+                <ProductsGrid products={...products}></ProductsGrid>
+              </RevealWrapper>
+              
             : 
             <div>Sorry, no products to display!</div>}
           </div>
