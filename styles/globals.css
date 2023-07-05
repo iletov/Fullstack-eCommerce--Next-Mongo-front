@@ -1,0 +1,73 @@
+/* chrome and chromium based */
+/* .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+  display: none;
+} */
+
+/* .react-horizontal-scrolling-menu--scroll-container { */
+  /* -ms-overflow-style: none; IE and Edge */
+  /* scrollbar-width: none; Firefox */
+/* } */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.leftArrow svg, .rightArrow svg {
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  border-radius: 4px;
+  position: absolute;
+  bottom: -230px;
+  transform: scale(1, 1);
+  transition: 0.3s all ease-in-out;
+  width: 30px;
+  color: #7c0043;
+}
+
+.rightArrow svg {
+  right: 40%;
+}
+.leftArrow svg {
+  left: 40%;
+}
+
+@media screen and (max-width: 768px) {
+  .leftArrow, .rightArrow {
+    display: none;
+  }
+}
+
+.paginationBtns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.paginationBtns a {
+  padding: 4px 8px;
+  border-radius: 12%;
+}
+
+.paginationActive a {
+  background-color: #9994;
+}
+
+.prevBtn, .nextBtn {
+  padding: 4px 8px;
+  display: flex;
+}
+
+svg {
+  width: 20px;
+}
+

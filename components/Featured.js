@@ -12,9 +12,8 @@ import { RevealWrapper } from 'next-reveal';
 
 const BackGround = styled.div`
   /* background: rgb(2,24,31); */
-  /* background: linear-gradient(87deg, rgba(17, 7, 51, 1) 50%, rgba(5,54,92,1) 100%); */
-  background: rgb(7, 51, 39);
-  background: linear-gradient(87deg, rgba(7, 51, 39, 1) 50%, rgba(16, 119, 102, 1) 100%);
+  /* background: linear-gradient(87deg, rgba(123, 120, 0, 1) 50%, rgba(5,54,92,1) 100%); */
+  background: linear-gradient(87deg, rgba(5, 28, 33, 1) 50%, rgba(45, 84, 93, 1) 100%);
   padding: 125px 0 50px 0;
   color: ${white};
 `;

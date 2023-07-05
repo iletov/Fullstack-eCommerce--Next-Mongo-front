@@ -21,7 +21,7 @@ const ColWrapper = styled.div`
 
   @media screen and (min-width: 768px) {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 1fr 1fr;
   }
 `;
 

@@ -1,3 +1,4 @@
+import { AllCategories } from '@/components/AllCategories'
 import { CategoryBox } from '@/components/CategoryBox'
 import Center from '@/components/Center'
 import Header from '@/components/Header'
@@ -10,14 +11,15 @@ import { Product } from '@/models/Product'
 // import { getServerSession } from 'next-auth' 
 
 
-const ProductsPage = ({allProducts, wishedProducts, mainCategories,categoriesProducts}) => {
+
+const ProductsPage = ({allProducts, wishedProducts, mainCategories,categoriesProducts}) => {  
   return (
     <>
     <Header />
       <Center>
         {/* <h1>Products</h1>
         <ProductsGrid products={allProducts} wishedProducts={wishedProducts}/> */}
-        <CategoryBox mainCategories={mainCategories} categoriesProducts={categoriesProducts} />
+          <AllCategories mainCategories={mainCategories} categoriesProducts={categoriesProducts} />
       </Center>
       
   </>

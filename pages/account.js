@@ -13,6 +13,7 @@ import ProductBox from '@/components/ProductBox';
 import Tabs from '@/components/Tabs';
 import SingleOrder from '@/components/SingleOrder';
 import ReactPaginate from 'react-paginate';
+import { back, fwd } from '@/components/Colors';
 
 
 
@@ -37,6 +38,7 @@ const WishedProductsGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 40px;
 `;
+
 
 const AccountPage = () => {
   const [name, setName] = useState('');
@@ -145,13 +147,14 @@ const AccountPage = () => {
                                 <SingleOrder {...order} key={index}/>
                           ))}
                             
-                           
+                              
                               <ReactPaginate 
-                                previousLabel={'Prev'} 
-                                nextLabel={'Next'}
+                                previousLabel={back}
+                                nextLabel={fwd}
                                 pageCount={pageCount}
                                 onPageChange={changePage}
-                                containerClassName={'paginationBtns'}
+                                pageRangeDisplayed={3}
+                                containerClassName='paginationBtns'
                                 previousLinkClassName={'prevBtn'}
                                 nextLinkClassName={'nextBtn'}
                                 disabledClassName={'paginationDisabled'}

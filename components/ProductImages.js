@@ -13,7 +13,7 @@ const BigImageWrapper = styled.div`
 
 const BigImage = styled.img`
   max-width: 100%;
-  max-height: 175px;
+  max-height: 220px;
 `;
 
 const ImageWrapper = styled.div`

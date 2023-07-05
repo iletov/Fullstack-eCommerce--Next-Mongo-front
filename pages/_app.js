@@ -2,8 +2,8 @@ import { CartContextProvider } from "@/components/CartContext";
 import { Toaster } from "react-hot-toast";
 import { createGlobalStyle } from "styled-components"
 import { SessionProvider } from "next-auth/react"
-import { background, boxGrey, primary, white } from "@/components/Colors";
-import '../styles/pagination.css'
+import { background } from "@/components/Colors";
+import "@/styles/globals.css";
 
 const GlobalStyles = createGlobalStyle`
 

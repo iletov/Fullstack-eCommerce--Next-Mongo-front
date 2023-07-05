@@ -7,20 +7,28 @@ import Center from './Center';
 import { RevealWrapper } from 'next-reveal';
 import { HorizontalScroll } from './HorizontalScroll';
 
-const CategoryWrapper = styled.div`
-  margin-top: 100px;
-  /* display: grid; */
-  /* grid-template-columns: repeat(2, 1fr); */
-  /* gap: 30px; */
+const Wrapper = styled.div`
+margin: 50px 0;
+`;
 
-  /* @media screen and (min-width: 768px) {
+const CategoryWrapper = styled.div`
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+
+  @media screen and (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
-  } */
+  }
+
+  @media screen and (max-width: 466px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const WhiteBox = styled.div`
-  /* background-color: ${white}; */
-  /* padding: 20px; */
+  background-color: ${white};
+  padding: 20px;
   width: 160px;
   height: 160px;
   display: flex;
@@ -28,14 +36,17 @@ const WhiteBox = styled.div`
   flex-direction: column-reverse;
   justify-content: center;
   border-radius: 5%;
-  /* position: relative; */
-  margin: 0 25px;
+  position: relative;
   img {
-    /* filter: grayscale(100%); */
     transition: ease-in-out .1s;
     max-width: 100%;
-    max-height: 90px;
-    margin-bottom: 5px;
+    max-height: 80px;
+    margin-bottom: 15px;
+    transition: ease-in-out .3s;
+  }
+
+  img:hover {
+    transform: scale(1.15);
   }
 
 `;
@@ -50,13 +61,13 @@ const StyledLink = styled(Link)`
   }
 `;
 
-export const CategoryBox = ({ mainCategories, categoriesProducts }) => {
+export const AllCategories = ({ mainCategories, categoriesProducts }) => {
   return (
     <Center>
+    <Wrapper>
+    <h2>All Categories</h2>
     <CategoryWrapper>
-      <h2>All Categories</h2>
-        <HorizontalScroll>
-   
+
       {mainCategories?.map((singleCategory, index) => (
           <RevealWrapper delay={index*100} duration={1200} >
             <WhiteBox 
@@ -76,10 +87,9 @@ export const CategoryBox = ({ mainCategories, categoriesProducts }) => {
             </WhiteBox>
             </RevealWrapper>
           ))}
-          </HorizontalScroll>
 
     </CategoryWrapper>
-
+    </Wrapper>
     </Center>
   )
 }
