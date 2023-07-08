@@ -8,7 +8,7 @@ import { RevealWrapper } from 'next-reveal';
 import { HorizontalScroll } from './HorizontalScroll';
 
 const CategoryWrapper = styled.div`
-  margin-top: 100px;
+  margin: 40px 0;
   /* display: grid; */
   /* grid-template-columns: repeat(2, 1fr); */
   /* gap: 30px; */

@@ -22,7 +22,7 @@ export default function HomePage({ featuredProduct, newProducts, wishedNewProduc
       <CategoryBox mainCategories={mainCategories} categoriesProducts={categoriesProducts} />
       <SearchHome />
       <CategoryProducts mainCategories={mainCategories} categoriesProducts={categoriesProducts} wishedProducts={wishedProducts}/>
-      {/* <NewProducts newProducts={newProducts} wishedProducts={wishedNewProducts} /> */}
+      <NewProducts newProducts={newProducts} wishedProducts={wishedNewProducts} />
     </div>
   )
 }
@@ -65,21 +65,21 @@ export async function getServerSideProps(context) {
   const featuredProductId = featuredProductSettings.value;;
 
   const featuredProduct = await Product.findById(featuredProductId);
-  // const newProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:10});
+  const newProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:10});
   
-  // const session = await getServerSession(context.req, context.res, authOptions);
-  // const wishedNewProducts = session?.user 
-  // ? await WishedProducts.find({
-  //   userEmail: session.user.email,
-  //   product: newProducts.map((p) => p._id.toString()),  
-  // }) 
-  // : [];
+  const session = await getServerSession(context.req, context.res, authOptions);
+  const wishedNewProducts = session?.user 
+  ? await WishedProducts.find({
+    userEmail: session.user.email,
+    product: newProducts.map((p) => p._id.toString()),  
+  }) 
+  : [];
   
   return {
     props: { 
       featuredProduct: JSON.parse(JSON.stringify(featuredProduct)),
-      // newProducts:JSON.parse(JSON.stringify(newProducts)),
-      // wishedNewProducts: wishedNewProducts.map((item) => item.product.toString()),
+      newProducts:JSON.parse(JSON.stringify(newProducts)),
+      wishedNewProducts: wishedNewProducts.map((item) => item.product.toString()),
       //----------------------------------
       mainCategories: JSON.parse(JSON.stringify(mainCategories)),
       categoriesProducts: JSON.parse(JSON.stringify(categoriesProducts)),

@@ -15,10 +15,10 @@ const CategoryWrapper = styled.div`
   margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  gap: 10px;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   @media screen and (max-width: 466px) {
@@ -28,9 +28,9 @@ const CategoryWrapper = styled.div`
 
 const WhiteBox = styled.div`
   background-color: ${white};
-  padding: 20px;
-  width: 160px;
-  height: 160px;
+  padding: 0px;
+  width: 100%;
+  height: 180px;
   display: flex;
   align-items: center;
   flex-direction: column-reverse;
@@ -45,7 +45,7 @@ const WhiteBox = styled.div`
     transition: ease-in-out .3s;
   }
 
-  img:hover {
+  :hover img {
     transform: scale(1.15);
   }
 

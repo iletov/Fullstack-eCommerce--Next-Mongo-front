@@ -1,6 +1,6 @@
 import Center from '@/components/Center'
 import Header from '@/components/Header'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Input from '@/components/Input'
 import axios from 'axios'
@@ -9,11 +9,11 @@ import { debounce } from 'lodash'
 import { Spinner } from '@/components/Spinner'
 import { dark, grey, primary } from './Colors'
 import { darkgrey } from './Colors'
-import Image from 'next/image'
-import bennman from '@/assets/Benman.jpg'
+import { CartContext } from './CartContext'
+
 
 const ImgWrapper = styled.div`
-  margin-top: 100px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
 `;
@@ -34,7 +34,7 @@ const SearchInput = styled(Input)`
 `;
 
 const SearchedProductsWrap = styled.div`
-  margin: 40px 0 100px;
+  margin: 30px 0;
 `;
 
 const NoFound = styled.h3`
@@ -56,6 +56,7 @@ const NoFound = styled.h3`
 // `;
 
 const SearchHome = () => {
+  const { carousel } = useContext(CartContext);
   const [phrase, setPhrase] = useState('');
   const [products, setProducts] = useState([]);
   const debouncedSearch = useCallback(
@@ -102,7 +103,10 @@ const SearchHome = () => {
             )}
             {!isLoading && products.length > 0 && (
               <SearchedProductsWrap>
-                <ProductsGrid products={products}></ProductsGrid>
+                <ProductsGrid 
+                products={products}
+                carousel={carousel}
+                ></ProductsGrid>
               </SearchedProductsWrap>
             )}
             

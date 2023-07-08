@@ -8,6 +8,7 @@ export const CartContextProvider = ({ children }) => {
   const storage = typeof window !== "undefined" ? window.localStorage : null;
 
   const [cartProducts, setCartProducts] = useState([]);
+  const [carousel, setCarousel] = useState(true);
   
   useEffect(() =>{
     if (cartProducts?.length > 0) {
@@ -51,6 +52,8 @@ export const CartContextProvider = ({ children }) => {
         addProduct,
         removeProduct,
         clearCart,
+        carousel,
+        setCarousel,
         }}
     >
       {children}

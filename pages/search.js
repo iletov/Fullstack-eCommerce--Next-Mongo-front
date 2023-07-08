@@ -1,6 +1,6 @@
 import Center from '@/components/Center'
 import Header from '@/components/Header'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Input from '@/components/Input'
 import axios from 'axios'
@@ -8,6 +8,7 @@ import ProductsGrid from '@/components/ProductsGrid'
 import { debounce } from 'lodash'
 import { Spinner } from '@/components/Spinner'
 import { primary } from '@/components/Colors'
+import { CartContext } from '@/components/CartContext'
 
 const SearchInput = styled(Input)`
   padding: 10px;
@@ -23,6 +24,7 @@ const SearchInput = styled(Input)`
 `;
 
 const search = () => {
+  const { carousel, setCarousel } = useContext(CartContext);
   const [phrase, setPhrase] = useState('');
   const [products, setProducts] = useState('');
   const debouncedSearch = useCallback(debounce(phrase => searchProducts(phrase), 500),[]);
@@ -32,6 +34,7 @@ const search = () => {
   useEffect(() => {
     if (phrase.length > 0) {
       setIsLoading(true);
+      setCarousel(false);
       debouncedSearch(phrase);
     } else {
       setProducts('');
@@ -64,7 +67,7 @@ const search = () => {
             <Spinner />
           )}
           {!isLoading && products.length > 0 && (
-            <ProductsGrid products={products} ></ProductsGrid>
+            <ProductsGrid products={products} carousel={carousel}></ProductsGrid>
           )}
           
       </Center>

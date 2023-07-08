@@ -1,3 +1,4 @@
+import { CartContext } from '@/components/CartContext'
 import Center from '@/components/Center'
 import { dark, grey, lightGray, primary, white } from '@/components/Colors'
 import Header from '@/components/Header'
@@ -7,14 +8,13 @@ import { Category } from '@/models/Category'
 import { Product } from '@/models/Product'
 import axios from 'axios'
 import { RevealWrapper } from 'next-reveal'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const CategoryHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
 `;
 
 const FiltersWrapper = styled.div`
@@ -37,10 +37,7 @@ const Filter = styled.div`
     border-radius: 6%;
     font-size: inherit;
     color: ${primary};
-    
-  option {
-    padding: 20px;
-  };
+
   }
 
   
@@ -49,11 +46,13 @@ const Filter = styled.div`
 const CategoryPage = ({ category, subCategories, products:originalProducts }) => {
   const defaultFiltersValues = category.properties.map((prop) => ({name: prop.name, value: 'all'}));
   const defaultSorting = '_id-desc';
-
+  
   const [products, setProducts] = useState(originalProducts);
   const [filtersValues, setFiltersValues] = useState(defaultFiltersValues);
   const [sort, setSort] = useState(defaultSorting);
   const [loadingProducts, setLoadingProducts] = useState(false);
+  
+  const { carousel, setCarousel } = useContext(CartContext);
 
   const handlerFilterChange = (filterName, filterValue) => {
     setFiltersValues(prev => {
@@ -64,9 +63,11 @@ const CategoryPage = ({ category, subCategories, products:originalProducts }) =>
     })
   };
 
+
   useEffect(() => {
     if (filtersValues !== defaultFiltersValues || sort !== defaultSorting) {
       setLoadingProducts(true);
+      setCarousel(false);
     }
 
     const catIds = [category._id, ...(subCategories?.map((c) => c._id) || [])];
@@ -132,7 +133,10 @@ const CategoryPage = ({ category, subCategories, products:originalProducts }) =>
           <div>
             {products.length > 0 ? 
               <RevealWrapper delay={150}>
-                <ProductsGrid products={...products}></ProductsGrid>
+                <ProductsGrid 
+                products={...products}
+                carousel={carousel}
+                ></ProductsGrid>
               </RevealWrapper>
               
             : 

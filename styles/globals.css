@@ -11,29 +11,28 @@
   width: 0px;
 }
 
-.leftArrow svg, .rightArrow svg {
+.leftArrow, .rightArrow {
   cursor: pointer;
   background: transparent;
   outline: none;
   border: none;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  border-radius: 4px;
-  position: absolute;
-  bottom: -230px;
-  transform: scale(1, 1);
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* width: 30px; */
+  /* border-radius: 4px; */
+  /* position: absolute; */
+  /* bottom: -230px; */
+  transform: scale(1);
   transition: 0.3s all ease-in-out;
-  width: 30px;
   color: #7c0043;
 }
 
 .rightArrow svg {
-  right: 40%;
+  width: 40px;
 }
 .leftArrow svg {
-  left: 40%;
+  width: 40px;
 }
 
 @media screen and (max-width: 768px) {
