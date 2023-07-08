@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import Link from 'next/link';
-import { leftArrow, rightArrow, white } from './Colors';
+import { grey, leftArrow, rightArrow, white } from './Colors';
 import Button from './StyledBtn';
 import Center from './Center';
 import { RevealWrapper } from 'next-reveal';
@@ -35,12 +35,13 @@ const WhiteBox = styled.div`
   align-items: center;
   flex-direction: column-reverse;
   justify-content: center;
-  border-radius: 5%;
+  /* border-radius: 5px; */
   position: relative;
+  box-shadow: 1px 1px 6px ${grey};
   img {
     transition: ease-in-out .1s;
     max-width: 100%;
-    max-height: 80px;
+    max-height: 100px;
     margin-bottom: 15px;
     transition: ease-in-out .3s;
   }

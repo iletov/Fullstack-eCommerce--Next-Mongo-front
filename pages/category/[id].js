@@ -63,11 +63,15 @@ const CategoryPage = ({ category, subCategories, products:originalProducts }) =>
     })
   };
 
+  useEffect(() => {
+    setCarousel(false);
+  },[])
 
   useEffect(() => {
+    
     if (filtersValues !== defaultFiltersValues || sort !== defaultSorting) {
       setLoadingProducts(true);
-      setCarousel(false);
+      
     }
 
     const catIds = [category._id, ...(subCategories?.map((c) => c._id) || [])];
@@ -85,6 +89,7 @@ const CategoryPage = ({ category, subCategories, products:originalProducts }) =>
     const url = `/api/products?` + params.toString();
     axios.get(url).then(result => {
       setProducts(result.data)})
+      
 
       setTimeout(() => {
         setLoadingProducts(false);

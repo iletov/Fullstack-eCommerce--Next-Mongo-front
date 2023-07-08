@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Button from './StyledBtn';
 import CartIcon from './CartIcon';
 import Link from 'next/link';
-import { black, boxGrey, dark, darkgrey, grey, lightGray, white } from './Colors';
+import { black, boxGrey, dark, darkgrey, grey, lightGray, price, primary, white } from './Colors';
 import { CartContext } from './CartContext';
 import { toast } from 'react-hot-toast';
 import { HeartOutline } from './HeartOutline';
@@ -13,13 +13,14 @@ import axios from 'axios';
 const ProductWrapper = styled.div`
   background-color: ${white};
   box-shadow: 1px 1px 6px ${grey};
+  /* min-height: 280px; */
   :hover img{
     transform: scale(1.15);
   }
 `;
 
 const WhiteBox = styled(Link)`
-  background-color: ${white};
+  /* background-color: ${white}; */
   padding: 20px;
   height: 120px;
   display: flex;
@@ -29,7 +30,7 @@ const WhiteBox = styled(Link)`
   position: relative;
   img {
     max-width: 100%;
-    max-height: 80px;
+    max-height: 140px;
     transition: ease-in-out .3s;
   }
 
@@ -37,7 +38,7 @@ const WhiteBox = styled(Link)`
 `;
 
 const Title = styled(Link)`
-  font-weight: normal;
+  font-weight: bold;
   font-size: .9rem;
   text-decoration: none;
   color: ${black};
@@ -59,12 +60,12 @@ const PriceBox = styled.div`
 `;
 
 const Price = styled.div`
-  font-size: 1rem;
+  font-size: .8rem;
   font-weight: bold;
   margin: 5px;
-
+  color: ${price};
   @media screen and (min-width: 768px) {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 `;
 
@@ -125,12 +126,12 @@ const ProductBox = ({ _id, title, description, price, images, wishedProp=false, 
       </WhiteBox>
         <ProductInfoBox>
           <div>
-            <Title href={url}>{title.slice(0, 25)}</Title>
+            <Title href={url}>{title.slice(0, 20)}</Title>
           </div>
           <PriceBox>
             <Price>${price}</Price>
             
-            <Button primaryOutline onClick={() => [addProduct(_id), msg()]} ><CartIcon /></Button>
+            <Button buy onClick={() => [addProduct(_id), msg()]} ><CartIcon /></Button>
           </PriceBox>
           
         </ProductInfoBox>

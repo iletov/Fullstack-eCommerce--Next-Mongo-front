@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { grey, primary, white } from './Colors';
+import { black, buyIcon, dark, grey, primary, secondary, white } from './Colors';
 
 export const ButtonStyleCss = css`
   border: 0;
@@ -28,7 +28,7 @@ export const ButtonStyleCss = css`
 
   ${props => props.primary && css`
     background-color: ${primary};
-    color: ${white};
+    color: ${dark};
     border: 1px solid ${primary};
     svg {
       height: 16px;
@@ -57,6 +57,16 @@ ${props => props.primaryOutline && css`
     }
   `}
 
+${props => props.buy && css`
+    background-color: transparent;
+    color: ${buyIcon};
+    padding: 0;
+    border: 1px solid transparent;
+    svg {
+      height: 24px;
+    }
+  `}
+
   ${props => props.white && css`
     background-color: ${white};
     color: #000;
@@ -66,6 +76,12 @@ ${props => props.primaryOutline && css`
     background-color: transparent;
     color: ${white};
     border: 1px solid ${white};
+  `}
+
+${props => props.outlineDark && css`
+    background-color: transparent;
+    color: ${dark};
+    border: 1px solid ${dark};
   `}
 
 `;

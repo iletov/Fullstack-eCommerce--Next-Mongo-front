@@ -8,7 +8,7 @@ import { background, dark, darkgrey, lightGray, navLinks, primary, white } from 
 import { SearchIcon } from './SearchIcon'
 
 const StyledHeader = styled.header`
-  background: linear-gradient(87deg, rgba(5, 28, 33, 1) 50%, rgba(45, 84, 93, 1) 100%);
+    /* background: linear-gradient(87deg, rgba(141, 152, 142, 1) 50%, rgba(207, 210, 207, 1) 100%); */
   ${props => props.mobileView && `
     position: fixed;
     width: 100%;
@@ -16,11 +16,11 @@ const StyledHeader = styled.header`
   `}
   top: 0;
   z-index: 10;
-  /* border-top: 3px solid ${primary}; */
+  border-bottom: 4px solid ${primary};
 `;
 
 const Logo = styled(Link)`
-  color:${white};
+  color:${dark};
   text-decoration:none;
   position: relative;
   z-index: 3;
@@ -56,7 +56,7 @@ const StyledNav = styled.nav`
 
 const NavLink = styled(Link)`
   display: block;
-  color:${white};
+  color:${dark};
   min-width: 30px;
   text-decoration: none;
   padding: 10px 0;

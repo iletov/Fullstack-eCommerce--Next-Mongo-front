@@ -13,9 +13,9 @@ import { RevealWrapper } from 'next-reveal';
 const BackGround = styled.div`
   /* background: rgb(2,24,31); */
   /* background: linear-gradient(87deg, rgba(123, 120, 0, 1) 50%, rgba(5,54,92,1) 100%); */
-  background: linear-gradient(87deg, rgba(5, 28, 33, 1) 50%, rgba(45, 84, 93, 1) 100%);
-  padding: 125px 0 50px 0;
-  color: ${white};
+  background: linear-gradient(87deg, rgba(180, 181, 171, 1) 50%, rgba(232, 233, 2223, 1) 100%);
+  padding: 75px 0 50px 0;
+  color: ${dark};
 `;
 
 const Title = styled.h1`
@@ -29,7 +29,7 @@ const Title = styled.h1`
 `;
 
 const P = styled.p`
-    color: #aaa;
+    color: ${dark};
     font-size: .8rem;
 `; 
 
@@ -40,7 +40,7 @@ const ColumsWrapper = styled.div`
     
     img {
       max-width: 100%;
-      max-height: 250px;
+      max-height: 350px;
       display: block;
       margin: 0 auto;
     }
@@ -52,12 +52,13 @@ const ColumsWrapper = styled.div`
     
 
     @media screen and (min-width: 768px) {
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1fr 1fr;
       div: nth-child(1) {
       order: 0;
     }
     img {
       max-width: 100%;
+      max-height: 300px;
     }
     }
 `;
@@ -99,9 +100,9 @@ const Featured = ({ product }) => {
                   <P>{product.description}</P>
 
                   <ButtonWrapper>
-                    <ButtonLink href={'/product/' + product._id }  outline={1} white={1}>Read More</ButtonLink> 
+                    <ButtonLink href={'/product/' + product._id }  outlineDark >Read More</ButtonLink> 
                     <div>
-                    <Button primary={1} onClick={addFeaturedToCart}>
+                    <Button primary onClick={addFeaturedToCart}>
                       <CartIcon />
                       Add to Cart
                     </Button>

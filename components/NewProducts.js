@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Center from './Center';
 import ProductsGrid from './ProductsGrid';
@@ -22,6 +22,7 @@ const Title = styled.h2`
 
 const NewProducts = ({ newProducts, wishedProducts }) => {
   const { carousel } = useContext(CartContext);
+    
   // const [carousel, setCarousel] = useState(true);
   // console.log({wishedProducts})
   return (

@@ -65,7 +65,7 @@ export async function getServerSideProps(context) {
   const featuredProductId = featuredProductSettings.value;;
 
   const featuredProduct = await Product.findById(featuredProductId);
-  const newProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:10});
+  const newProducts = await Product.find({}, null, {sort: {'_id':-1}, limit:15});
   
   const session = await getServerSession(context.req, context.res, authOptions);
   const wishedNewProducts = session?.user 
