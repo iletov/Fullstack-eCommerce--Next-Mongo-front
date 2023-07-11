@@ -1,9 +1,9 @@
 
 // export const primary = '#C21010'   
 export const primary = '#FFD700'
-export const background = '#f1f3e8'
+export const background = '#efefef'
 export const white = '#fff';
-export const black = '#000';
+export const black = '#222';
 export const dark = '#051C21';
 export const lightGray= '#2227';
 export const grey = '#ccc';

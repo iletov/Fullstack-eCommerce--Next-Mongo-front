@@ -4,11 +4,12 @@ import styled from 'styled-components'
 import Center from './Center'
 import { CartContext } from './CartContext'
 import Bars from './Bars'
-import { background, dark, darkgrey, lightGray, navLinks, primary, white } from './Colors'
+import { background, black, dark, darkgrey, lightGray, navLinks, primary, white } from './Colors'
 import { SearchIcon } from './SearchIcon'
 
 const StyledHeader = styled.header`
     /* background: linear-gradient(87deg, rgba(141, 152, 142, 1) 50%, rgba(207, 210, 207, 1) 100%); */
+  background-color: ${black};
   ${props => props.mobileView && `
     position: fixed;
     width: 100%;
@@ -20,7 +21,7 @@ const StyledHeader = styled.header`
 `;
 
 const Logo = styled(Link)`
-  color:${dark};
+  color:${white};
   text-decoration:none;
   position: relative;
   z-index: 3;
@@ -35,7 +36,7 @@ const Wrapper = styled.div`
 const StyledNav = styled.nav`
   ${props => props.mobileView ? `
   display: block;
-  background-color: ${background};
+  background-color: ${black};
   ` : `
   display: none;
 
@@ -56,7 +57,7 @@ const StyledNav = styled.nav`
 
 const NavLink = styled(Link)`
   display: block;
-  color:${dark};
+  color:${white};
   min-width: 30px;
   text-decoration: none;
   padding: 10px 0;
@@ -80,7 +81,7 @@ const NavButton = styled.button`
   border: 0;
   width: 40px;
   height: 40px;
-  color: ${dark};
+  color: ${white};
   cursor: pointer;
   position: relative;
   z-index: 3;

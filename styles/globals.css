@@ -25,7 +25,11 @@
   /* bottom: -230px; */
   transform: scale(1);
   transition: 0.3s all ease-in-out;
-  color: #7c0043;
+  color: #222;
+}
+
+.leftArrow:hover, .rightArrow:hover {
+  color: #FFD700;
 }
 
 .rightArrow svg {
@@ -58,7 +62,8 @@
 }
 
 .paginationActive a {
-  background-color: #9994;
+  background-color: #222;
+  color: #FFD700;
 }
 
 .prevBtn, .nextBtn {

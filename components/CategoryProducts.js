@@ -16,6 +16,10 @@ const CategoryWrapper = styled.div`
   margin: 0 5px;
 `;
 
+const Wrapp = styled.div`
+  min-width: 200px;
+`;
+
 // const CategoryGrid = styled.div`
 //   display: grid;
 //   grid-template-columns: repeat(2, 1fr);
@@ -44,13 +48,13 @@ export const CategoryProducts = ({ mainCategories, categoriesProducts, wishedPro
         {/* <CategoryGrid> */}
        <HorizontalScroll>
         {mainCategories?.map((singleCategory, index) => (
-          <RevealWrapper delay={index*100} duration={1200}>
+          <RevealWrapper delay={index*100} duration={1200} key={index}>
           <CategoryWrapper>
               {categoriesProducts[singleCategory._id].map((product) => (
                 
-                  <div style={{ minWidth: '200px' }}>
-                  <ProductBox key={product._id} {...product} wishedProp={wishedProducts.includes(product._id)} />
-                  </div>
+                  <Wrapp key={product._id} >
+                    <ProductBox {...product} wishedProp={wishedProducts.includes(product._id)} />
+                  </Wrapp>
                 
               ))}
               

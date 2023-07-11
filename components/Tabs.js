@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { dark, grey, primary } from "./Colors";
+import { black, dark, grey, primary } from "./Colors";
 
 const StyledTabs = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const StyledSpan = styled.span`
   padding-bottom: 10px;
   cursor: pointer;
   ${props => props.active ? `
-    color: ${primary};
+    color: ${black};
     border-bottom: 3px solid ${primary}
   ` : `
     color: ${grey}
@@ -24,8 +24,9 @@ const StyledSpan = styled.span`
 const Tabs = ({ tabs, active, onChange }) => {
   return (
     <StyledTabs>
-      {tabs.map((tabName) => (
-        <StyledSpan 
+      {tabs.map((tabName, index) => (
+        <StyledSpan
+          key={index} 
           active={tabName === active} 
           onClick={() => { onChange(tabName)}}
           >

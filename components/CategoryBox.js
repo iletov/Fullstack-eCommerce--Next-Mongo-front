@@ -58,19 +58,16 @@ export const CategoryBox = ({ mainCategories, categoriesProducts }) => {
         <HorizontalScroll>
    
       {mainCategories?.map((singleCategory, index) => (
-          <RevealWrapper delay={index*100} duration={1200} >
-            <WhiteBox 
-              key={index} 
-              
-              >
+          <RevealWrapper delay={index*100} duration={1200} key={index} >
+            <WhiteBox >
               <StyledLink href={'/category/' + singleCategory._id}>
                 <Button primaryOutline >{singleCategory.name}</Button>
               </StyledLink>
               
               {categoriesProducts[singleCategory._id].map((singleProduct) => (
-                  <div>
+                  <div key={singleProduct._id} >
                     {/* <BoxTitle>{singleCategory.name}</BoxTitle> */}
-                    <Link href={'/category/' + singleCategory._id}><img src={...singleProduct.images[0]} /></Link>
+                    <Link  href={'/category/' + singleCategory._id}><img src={...singleProduct.images[0]} /></Link>
                   </div>
               ))}
             </WhiteBox>

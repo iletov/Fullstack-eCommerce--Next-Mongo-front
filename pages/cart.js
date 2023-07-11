@@ -186,7 +186,7 @@ const CartPage = () => {
                 </thead> 
                 <tbody>
                    {products.map((product) => (
-                    <tr> 
+                    <tr key={product._id}> 
                       
                       <ProductInfoCell>
                         <ProductImageBox>

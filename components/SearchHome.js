@@ -25,11 +25,10 @@ const SearchInput = styled(Input)`
   transition: ease-in-out .25s;
   position: relative;
   width: 100%;
+  border: 2px solid ${primary};
+  font-weight: bold;
   :focus {
     outline: none;
-    /* width: 100%; */
-    border: 1px solid ${primary};
-    transition: ease-in-out .25s;
     }
 `;
 

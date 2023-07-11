@@ -27,9 +27,9 @@ export const ButtonStyleCss = css`
   `}
 
   ${props => props.primary && css`
-    background-color: ${primary};
-    color: ${dark};
-    border: 1px solid ${primary};
+    background-color: ${black};
+    color: ${primary};
+    border: 1px solid ${black};
     svg {
       height: 16px;
       padding-bottom: 2px;
@@ -49,7 +49,7 @@ export const ButtonStyleCss = css`
 
 ${props => props.primaryOutline && css`
     background-color: transparent;
-    color: ${primary};
+    /* color: ${primary}; */
     padding: 0;
     border: 1px solid transparent;
     svg {
@@ -78,10 +78,10 @@ ${props => props.buy && css`
     border: 1px solid ${white};
   `}
 
-${props => props.outlineDark && css`
+${props => props.outlinedark && css`
     background-color: transparent;
-    color: ${dark};
-    border: 1px solid ${dark};
+    color: ${black};
+    border: 1px solid ${black};
   `}
 
 `;

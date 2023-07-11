@@ -1,6 +1,5 @@
 import styled from "styled-components"
-import { dark, darkgrey, grey } from "./Colors";
-import { Spinner } from "./Spinner";
+import { darkgrey, grey } from "./Colors";
 
 const StyledOrder = styled.div`
   margin: 5px 0;
@@ -47,8 +46,8 @@ const SingleOrder = ({ line_items, createdAt, ...restProps }) => {
       </div>
       
       <div>
-        {line_items.map((item) => (
-          <StyledDetails>
+        {line_items.map((item, index) => (
+          <StyledDetails key={index}>
             <span>{item.quantity} x </span> {item.price_data.product_data.name}
           </StyledDetails>
         ))}

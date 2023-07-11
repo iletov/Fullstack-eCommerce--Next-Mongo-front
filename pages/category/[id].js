@@ -1,6 +1,6 @@
 import { CartContext } from '@/components/CartContext'
 import Center from '@/components/Center'
-import { dark, grey, lightGray, primary, white } from '@/components/Colors'
+import { black, dark, grey, lightGray, primary, white } from '@/components/Colors'
 import Header from '@/components/Header'
 import ProductsGrid from '@/components/ProductsGrid'
 import { Spinner } from '@/components/Spinner'
@@ -28,15 +28,15 @@ const Filter = styled.div`
   border-radius: 5px;
   display: flex;
   gap: 10px;
-  color: ${primary};
+  color: ${black};
 
   select {
    background-color: transparent;
     border: 1;
     padding: 4px 6px;
-    border-radius: 6%;
+    border-radius: 100px;
     font-size: inherit;
-    color: ${primary};
+    color: ${black};
 
   }
 

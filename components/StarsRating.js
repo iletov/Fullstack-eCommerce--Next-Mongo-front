@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { StarOutline } from './StarOutline'
 import { StarSolid } from './StarSolid';
 import { useState } from 'react';
-import { primary } from './Colors';
+import { black, dark, primary } from './Colors';
 
 const Stars = styled.div`
   display: inline-flex;
@@ -46,16 +46,17 @@ export const StarsRating = ({
   }
   return (
     <Stars>
-      {fiveStars.map(number => (
-        <>
-          <StarWrapper 
+      {fiveStars.map((numb, index) => (
+        
+          <StarWrapper
+            key={index} 
             disabled={disabled} 
             size={size} 
-            onClick={() => handleStarsClick(number)}
+            onClick={() => handleStarsClick(numb)}
             >
-            {howMany >= number ? <StarSolid/> : <StarOutline/>}
+            {howMany >= numb ? <StarSolid/> : <StarOutline/>}
           </StarWrapper>
-        </>
+        
       ))}
     </Stars>
   )

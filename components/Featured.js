@@ -100,7 +100,7 @@ const Featured = ({ product }) => {
                   <P>{product.description}</P>
 
                   <ButtonWrapper>
-                    <ButtonLink href={'/product/' + product._id }  outlineDark >Read More</ButtonLink> 
+                    <ButtonLink outlinedark='true' href={'/product/' + product._id }>Read More</ButtonLink> 
                     <div>
                     <Button primary onClick={addFeaturedToCart}>
                       <CartIcon />
