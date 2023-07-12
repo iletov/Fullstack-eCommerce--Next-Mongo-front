@@ -42,17 +42,6 @@ const NoFound = styled.h3`
   color: ${darkgrey};
 `;
 
-// const Herro = styled.div`
-//   width: 100%;
-//   height: 35vh;
-//   position: relative;
-//   background-color: ${dark};
-// 	background-size: cover;
-// 	background-blend-mode: darken;
-//   display: flex;
-//   align-items: center;
-//   margin-bottom: 40px;
-// `;
 
 const SearchHome = () => {
   const { carousel } = useContext(CartContext);
@@ -95,7 +84,7 @@ const SearchHome = () => {
             </ImgWrapper>
           
             {!isLoading && phrase !== '' && products.length === 0 && (
-              <NoFound>No products match for "{phrase}"</NoFound>
+              <NoFound>No products match for &quot;{phrase}&quot;</NoFound>
             )}
             {isLoading && (
               <Spinner />
