@@ -142,6 +142,7 @@ const AccountPage = () => {
                           <div>
                           {orders.length > 0 && 
                             orders
+                              .toReversed()
                               .slice(pagesVisited, sliceOrders)
                               .map((order, index) => (
                                 <SingleOrder {...order} key={index}/>

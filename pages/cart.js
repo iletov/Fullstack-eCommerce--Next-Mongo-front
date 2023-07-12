@@ -10,6 +10,7 @@ import Input from '@/components/Input';
 import Box from '@/components/Box';
 import { RevealWrapper } from 'next-reveal';
 import { Spinner } from '@/components/Spinner';
+import { useSession } from 'next-auth/react';
 
 const ColumnsWrapper = styled.div`
   display: flex;
@@ -74,13 +75,9 @@ const CityHolder = styled.div`
   gap: 5px;
 `;
 
-
-const item = {
-  price: [100, 150, 200],
-}
-
 const CartPage = () => {
   const {cartProducts, addProduct, removeProduct, clearCart} = useContext(CartContext);
+  const {data:session} = useSession();
   const [products, setProducts] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -103,10 +100,22 @@ const CartPage = () => {
    }, [cartProducts]);
 
    useEffect(() => {
-    if (typeof window === 'object' && window?.location.href.includes('success')) {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (window?.location.href.includes('success')) {
       setIsSuccess(true);
       clearCart();
     }
+    axios.get('/api/settings?name=shippingFee').then(res => {
+      setShippingFee(res.data.value);
+    })
+    }, []);
+
+    useEffect(() => {
+      if (!session) {
+        return;
+      }
     axios.get('/api/address').then(response => {
       setName(response.data.name);
       setEmail(response.data.email);
@@ -115,11 +124,7 @@ const CartPage = () => {
       setStreetAddress(response.data.streetAddress);
       setCountry(response.data.country);
     });
-    axios.get('/api/settings?name=shippingFee').then(res => {
-      setShippingFee(res.data.value);
-    })
-   },[])
-
+   },[session])
 
    const plussProduct = (id) => {
     addProduct(id);
