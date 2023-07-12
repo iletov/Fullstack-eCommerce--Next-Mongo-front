@@ -23,7 +23,7 @@ const SearchInput = styled(Input)`
     }
 `;
 
-const search = () => {
+const SearchPage = () => {
   const { carousel, setCarousel } = useContext(CartContext);
   const [phrase, setPhrase] = useState('');
   const [products, setProducts] = useState('');
@@ -61,7 +61,7 @@ const search = () => {
           onChange={(e) => setPhrase(e.target.value)}
           />
           {!isLoading && phrase !== '' && products.length === 0 && (
-            <h2>No products match for "{phrase}"</h2>
+            <h2>No products match for &quot;{phrase}&quot;</h2>
           )}
           {isLoading && (
             <Spinner />
@@ -76,4 +76,4 @@ const search = () => {
   )
 }
 
-export default search
+export default SearchPage

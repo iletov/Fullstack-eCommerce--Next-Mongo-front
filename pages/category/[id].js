@@ -139,9 +139,9 @@ const CategoryPage = ({ category, subCategories, products:originalProducts }) =>
             {products.length > 0 ? 
               <RevealWrapper delay={150}>
                 <ProductsGrid 
-                products={...products}
+                products={products}
                 carousel={carousel}
-                ></ProductsGrid>
+                />
               </RevealWrapper>
               
             : 
