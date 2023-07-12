@@ -84,7 +84,7 @@ const SearchHome = () => {
             </ImgWrapper>
           
             {!isLoading && phrase !== '' && products.length === 0 && (
-              <NoFound>No products match for &quot;{phrase}&quot;</NoFound>
+              <NoFound>No products match for {phrase}</NoFound>
             )}
             {isLoading && (
               <Spinner />

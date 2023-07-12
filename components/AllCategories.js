@@ -78,7 +78,7 @@ export const AllCategories = ({ mainCategories, categoriesProducts }) => {
               {categoriesProducts[singleCategory._id].map((singleProduct) => (
                   <div key={singleProduct._id}>
                     {/* <BoxTitle>{singleCategory.name}</BoxTitle> */}
-                    <Link href={'/category/' + singleCategory._id}><img src={singleProduct.images[0]} alt='...'/></Link>
+                    <Link href={'/category/' + singleCategory._id}><img src={singleProduct.images[0]} alt='img'/></Link>
                   </div>
               ))}
             </WhiteBox>
