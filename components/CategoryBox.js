@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import Link from 'next/link';
-import { leftArrow, rightArrow, white } from './Colors';
-import Button from './StyledBtn';
-import Center from './Center';
-import { RevealWrapper } from 'next-reveal';
-import { HorizontalScroll } from './HorizontalScroll';
+import Link from "next/link";
+import { leftArrow, rightArrow, white } from "./Colors";
+import Button from "./StyledBtn";
+import Center from "./Center";
+import { RevealWrapper } from "next-reveal";
+import { HorizontalScroll } from "./HorizontalScroll";
 
 const CategoryWrapper = styled.div`
   margin: 40px 0;
@@ -32,12 +32,11 @@ const WhiteBox = styled.div`
   margin: 0 25px;
   img {
     /* filter: grayscale(100%); */
-    transition: ease-in-out .1s;
+    transition: ease-in-out 0.1s;
     max-width: 100%;
     max-height: 90px;
     margin-bottom: 5px;
   }
-
 `;
 
 const StyledLink = styled(Link)`
@@ -53,30 +52,29 @@ const StyledLink = styled(Link)`
 export const CategoryBox = ({ mainCategories, categoriesProducts }) => {
   return (
     <Center>
-    <CategoryWrapper>
-      <h2>All Categories</h2>
+      <CategoryWrapper>
+        <h2>All Categories</h2>
         <HorizontalScroll>
-   
-      {mainCategories?.map((singleCategory, index) => (
-          <RevealWrapper delay={index*100} duration={1200} key={index} >
-            <WhiteBox >
-              <StyledLink href={'/category/' + singleCategory._id}>
-                <Button primaryOutline >{singleCategory.name}</Button>
-              </StyledLink>
-              
-              {categoriesProducts[singleCategory._id].map((singleProduct) => (
-                  <div key={singleProduct._id} >
+          {mainCategories?.map((singleCategory, index) => (
+            <RevealWrapper delay={index * 100} duration={1200} key={index}>
+              <WhiteBox>
+                <StyledLink href={"/category/" + singleCategory._id}>
+                  <Button primaryOutline>{singleCategory.name}</Button>
+                </StyledLink>
+
+                {categoriesProducts[singleCategory._id].map((singleProduct) => (
+                  <div key={singleProduct._id}>
                     {/* <BoxTitle>{singleCategory.name}</BoxTitle> */}
-                    <Link  href={'/category/' + singleCategory._id}><img src={singleProduct.images[0]} alt='img'/></Link>
+                    <Link href={"/category/" + singleCategory._id}>
+                      <img src={singleProduct.images[0]} alt="img" />
+                    </Link>
                   </div>
-              ))}
-            </WhiteBox>
+                ))}
+              </WhiteBox>
             </RevealWrapper>
           ))}
-          </HorizontalScroll>
-
-    </CategoryWrapper>
-
+        </HorizontalScroll>
+      </CategoryWrapper>
     </Center>
-  )
-}
+  );
+};

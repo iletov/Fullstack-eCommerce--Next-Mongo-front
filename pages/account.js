@@ -14,6 +14,7 @@ import Tabs from '@/components/Tabs';
 import SingleOrder from '@/components/SingleOrder';
 import ReactPaginate from 'react-paginate';
 import { back, fwd } from '@/components/Colors';
+import Footer from '@/components/Footer';
 
 
 

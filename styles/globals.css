@@ -1,12 +1,8 @@
-/* chrome and chromium based */
-/* .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
-  display: none;
-} */
+body {
+  overflow-x: hidden;
+}
 
-/* .react-horizontal-scrolling-menu--scroll-container { */
-  /* -ms-overflow-style: none; IE and Edge */
-  /* scrollbar-width: none; Firefox */
-/* } */
+/* -------------------- */
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -17,16 +13,11 @@
   outline: none;
   border: none;
   display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* width: 30px; */
-  /* border-radius: 4px; */
-  /* position: absolute; */
-  /* bottom: -230px; */
   transform: scale(1);
   transition: 0.3s all ease-in-out;
   color: #222;
 }
+
 
 .leftArrow:hover, .rightArrow:hover {
   color: #FFD700;

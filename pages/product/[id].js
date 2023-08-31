@@ -3,6 +3,7 @@ import { CartContext } from '@/components/CartContext';
 import CartIcon from '@/components/CartIcon';
 import Center from '@/components/Center'
 import { white } from '@/components/Colors';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header'
 import ProductImages from '@/components/ProductImages';
 import { Reviews } from '@/components/Reviews';
@@ -62,6 +63,7 @@ return (
         </ColWrapper>
         <Reviews product={product} />
       </Center>
+      <Footer/>
     </>
   )
 }

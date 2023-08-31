@@ -9,6 +9,7 @@ import { debounce } from 'lodash'
 import { Spinner } from '@/components/Spinner'
 import { primary } from '@/components/Colors'
 import { CartContext } from '@/components/CartContext'
+import Footer from '@/components/Footer'
 
 const SearchInput = styled(Input)`
   padding: 10px;
@@ -71,7 +72,7 @@ const SearchPage = () => {
           )}
           
       </Center>
-
+      <Footer/>
     </>
   )
 }

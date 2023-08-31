@@ -8,6 +8,7 @@ import { HorizontalScroll } from './HorizontalScroll';
 
 
 
+
 const ProductsWrapper = styled.div`
   margin: 40px 0;
 `;

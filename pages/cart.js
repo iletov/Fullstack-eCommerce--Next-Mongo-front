@@ -11,6 +11,7 @@ import Box from '@/components/Box';
 import { RevealWrapper } from 'next-reveal';
 import { Spinner } from '@/components/Spinner';
 import { useSession } from 'next-auth/react';
+import Footer from '@/components/Footer';
 
 const ColumnsWrapper = styled.div`
   display: flex;
@@ -165,6 +166,7 @@ const CartPage = () => {
               </Box>
             </ColumnsWrapper>
           </Center>
+          <Footer/>
         </>  
       )   
    };
@@ -289,6 +291,7 @@ const CartPage = () => {
             )}
         </ColumnsWrapper>
       </Center>
+      <Footer/>
     </>
   )
 }

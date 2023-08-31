@@ -4,9 +4,10 @@ import { RevealWrapper } from "next-reveal";
 import { HorizontalScroll } from "./HorizontalScroll";
 
 const StyledProductsGrid = styled.div`
-    margin-bottom: 100px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 100px;
+  display: flex;
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr); */
   margin-bottom: 20px;
 
   @media screen and (min-width: 768px) {

@@ -1,6 +1,7 @@
 import { AllCategories } from '@/components/AllCategories'
 import { CategoryBox } from '@/components/CategoryBox'
 import Center from '@/components/Center'
+import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 // import ProductsGrid from '@/components/ProductsGrid'
 import { mongooseConnect } from '@/lib/mongoose'
@@ -21,7 +22,7 @@ const ProductsPage = ({allProducts, wishedProducts, mainCategories,categoriesPro
         <ProductsGrid products={allProducts} wishedProducts={wishedProducts}/> */}
           <AllCategories mainCategories={mainCategories} categoriesProducts={categoriesProducts} />
       </Center>
-      
+    <Footer/>
   </>
   )
 }

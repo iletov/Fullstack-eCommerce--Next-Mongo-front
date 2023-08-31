@@ -12,8 +12,9 @@ margin: 50px 0;
 
 const CategoryWrapper = styled.div`
   margin-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr); */
   gap: 10px;
 
   @media screen and (min-width: 768px) {

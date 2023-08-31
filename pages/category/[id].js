@@ -1,6 +1,7 @@
 import { CartContext } from '@/components/CartContext'
 import Center from '@/components/Center'
 import { black, dark, grey, lightGray, primary, white } from '@/components/Colors'
+import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import ProductsGrid from '@/components/ProductsGrid'
 import { Spinner } from '@/components/Spinner'
@@ -150,6 +151,7 @@ const CategoryPage = ({ category, subCategories, products:originalProducts }) =>
            
         )}
       </Center>
+      <Footer/>
     </>
   )
 }
