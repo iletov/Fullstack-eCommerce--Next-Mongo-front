@@ -19,7 +19,7 @@ export const CartContextProvider = ({ children }) => {
   useEffect(() => {
     if (storage && storage.getItem('cart')) {
       setCartProducts(JSON.parse(storage.getItem('cart')));
-    }
+    } 
   }, []);
 
   

@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import ProductBox from "./ProductBox";
-import { RevealWrapper } from "next-reveal";
 import { HorizontalScroll } from "./HorizontalScroll";
 
 const StyledProductsGrid = styled.div`
-  margin-bottom: 100px;
+  margin: 20px 0px;
   display: flex;
-  /* display: grid;
-  grid-template-columns: repeat(2, 1fr); */
-  margin-bottom: 20px;
 
-  @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(5, 1fr);
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 480px) {
+    flex-wrap: wrap;
   }
 `;
 const ProductWrapp = styled.div`
@@ -19,40 +19,38 @@ const ProductWrapp = styled.div`
   padding: 0 5px;
 `;
 
-
-
-const ProductsGrid = ({products, wishedProducts=[], carousel }) => {
+const ProductsGrid = ({ products, wishedProducts = [], carousel }) => {
   return (
-
     <>
-    {carousel === false && (
-      <StyledProductsGrid>
-      {products?.length > 0 && products?.map((item, index) => (
-          <RevealWrapper key={item._id} delay={index*100}>
-            <ProductWrapp >
-              <ProductBox {...item} wishedProp={wishedProducts.includes(item._id)} />
-            </ProductWrapp>
-          </RevealWrapper>
-          ))}
-      </StyledProductsGrid>
-    )}
-
-    {carousel === true && ( 
-      
-        <HorizontalScroll>
-          {products?.length > 0 && products?.map((item, index) => (
-            <RevealWrapper key={item._id} delay={index*100}>
-              <ProductWrapp >
-                <ProductBox {...item} wishedProp={wishedProducts.includes(item._id)} />
+      {carousel === false && (
+        <StyledProductsGrid>
+          {products?.length > 0 &&
+            products?.map((item, index) => (
+              <ProductWrapp key={index}>
+                <ProductBox
+                  {...item}
+                  wishedProp={wishedProducts.includes(item._id)}
+                />
               </ProductWrapp>
-            </RevealWrapper>
+            ))}
+        </StyledProductsGrid>
+      )}
+
+      {carousel === true && (
+        <HorizontalScroll>
+          {products?.length > 0 &&
+            products?.map((item, index) => (
+              <ProductWrapp key={index}>
+                <ProductBox
+                  {...item}
+                  wishedProp={wishedProducts.includes(item._id)}
+                />
+              </ProductWrapp>
             ))}
         </HorizontalScroll>
-        
-    )}
-      
+      )}
     </>
-  )
-}
+  );
+};
 
-export default ProductsGrid
+export default ProductsGrid;

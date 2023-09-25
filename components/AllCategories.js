@@ -8,29 +8,31 @@ import { RevealWrapper } from 'next-reveal';
 
 const Wrapper = styled.div`
 margin: 50px 0;
+
+@media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
 `;
 
 const CategoryWrapper = styled.div`
   margin-top: 50px;
   display: flex;
-  /* display: grid;
-  grid-template-columns: repeat(2, 1fr); */
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
 
-  @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  @media screen and (max-width: 466px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
 `;
 
 const WhiteBox = styled.div`
   background-color: ${white};
   padding: 0px;
-  width: 100%;
   height: 180px;
+  min-width: 200px;
   display: flex;
   align-items: center;
   flex-direction: column-reverse;

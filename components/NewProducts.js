@@ -21,10 +21,13 @@ const Title = styled.h2`
 `;
 
 const NewProducts = ({ newProducts, wishedProducts }) => {
-  const { carousel } = useContext(CartContext);
+  const { carousel, setCarousel } = useContext(CartContext);
+
+  
+  useEffect(() => {
+    setCarousel(true);
+  },[])
     
-  // const [carousel, setCarousel] = useState(true);
-  // console.log({wishedProducts})
   return (
     <>
       <Center>
