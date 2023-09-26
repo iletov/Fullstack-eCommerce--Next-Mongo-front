@@ -7,24 +7,24 @@ import Center from './Center';
 import { RevealWrapper } from 'next-reveal';
 
 const Wrapper = styled.div`
-margin: 50px 0;
-
-@media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  margin: 20px 0;
+  @media screen and (max-width: 480px) {
+    text-align: center;
   }
-
+ 
 `;
 
 const CategoryWrapper = styled.div`
   margin-top: 50px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
   gap: 10px;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+
+@media screen and (min-width: 480px) {
+    flex-wrap: wrap;
+  }
 
 `;
 
@@ -37,7 +37,6 @@ const WhiteBox = styled.div`
   align-items: center;
   flex-direction: column-reverse;
   justify-content: center;
-  /* border-radius: 5px; */
   position: relative;
   box-shadow: 1px 1px 6px ${grey};
   img {
